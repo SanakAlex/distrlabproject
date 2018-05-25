@@ -7,8 +7,11 @@ env:
     - REGISTRY_PASS=sanakalexbuilderpassword
     - secret: "something long"
 
+before_script:
+  - docker pull distrlabproject/repository || true
+
 script:
-  - docker build --tag distrlabproject/repository .
+  - docker build --pull --cache-from distrlabproject/repository --tag distrlabproject/repository .
   - docker run distrlabproject/repository
 
 after_script:
