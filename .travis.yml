@@ -1,10 +1,23 @@
 sudo: required
 services:
   - docker
+env:
+  global:
+    - REGISTRY_USER=sanakalexbuilder
+    - REGISTRY_PASS=sanakalexbuilderpassword
+    - secret: "something long"
 
 script:
-  - docker build --tag myimage .
-  - docker run myimage
+  - docker build --tag distrlabproject/repository .
+  - docker run distrlabproject/repository
 
 after_script:
   - docker images
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+deploy:
+  provider: script
+  script: docker push distrlabproject/repository
+  on:
+    branch: master
