@@ -17,6 +17,7 @@
         <module>registry</module>
         <module>gateway</module>
         <module>registry</module>
+        <module>backetservice</module>
         <!--<module>auth-service</module>-->
         <!--<module>account-service</module>-->
         <!--<module>statistics-service</module>-->
