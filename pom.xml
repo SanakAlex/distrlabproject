@@ -19,7 +19,7 @@
         <module>registry</module>
         <module>auth-service</module>
         <!--<module>account-service</module>-->
-        <module>backetservice</module>
+        <module>bucket-service</module>
         <!--<module>auth-service</module>-->
         <!--<module>account-service</module>-->
         <!--<module>statistics-service</module>-->
