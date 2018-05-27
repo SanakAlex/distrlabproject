@@ -13,7 +13,6 @@ env:
     - secret: "something long"
     - COMMIT=${TRAVIS_COMMIT::7}
 
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
@@ -40,7 +39,7 @@ after_success:
   - docker push $GATEWAY
 
   # AUTH SERVICE
-  - export AUTH_SERVICE=c/auth-service
+  - export AUTH_SERVICE=distrlabproject/auth-service
   - docker build -t $AUTH_SERVICE:$COMMIT ./auth-service
   - docker tag $AUTH_SERVICE:$COMMIT $AUTH_SERVICE:$TAG
   - docker push $AUTH_SERVICE
