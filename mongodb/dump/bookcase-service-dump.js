@@ -4,7 +4,7 @@
 
 print('dump start');
 
-db.books.update(
+db.books.insert(
     [
         {
             "id": 1,
