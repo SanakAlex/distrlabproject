@@ -50,11 +50,11 @@ after_success:
   - docker tag $BOOKCASE_SERVICE:$COMMIT $BOOKCASE_SERVICE:$TAG
   - docker push $BOOKCASE_SERVICE
 
-  # BOOKCASE-SERVICE
-    - export USER_SERVICE=distrlabproject/user-service
-    - docker build -t $USER_SERVICE:$COMMIT ./user-service
-    - docker tag $USER_SERVICE:$COMMIT $USER_SERVICE:$TAG
-    - docker push $USER_SERVICE
+  # USER-SERVICE
+  - export USER_SERVICE=distrlabproject/user-service
+  - docker build -t $USER_SERVICE:$COMMIT ./user-service
+  - docker tag $USER_SERVICE:$COMMIT $USER_SERVICE:$TAG
+  - docker push $USER_SERVICE
 
   # MONITORING
   - export MONITORING=distrlabproject/monitoring
