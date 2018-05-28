@@ -44,15 +44,20 @@ after_success:
   - docker tag $AUTH_SERVICE:$COMMIT $AUTH_SERVICE:$TAG
   - docker push $AUTH_SERVICE
 
-  # MONITORING
-  - export MONITORING=distrlabproject/monitoring
-  - docker build -t $MONITORING:$COMMIT ./monitoring
-  - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
-  - docker push $MONITORING
-
   # BOOKCASE-SERVICE
   - export MONITORING=distrlabproject/bookcase-service
   - docker build -t $MONITORING:$COMMIT ./monitoring
   - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
   - docker push $MONITORING
 
+  # MONITORING
+  - export MONITORING=distrlabproject/monitoring
+  - docker build -t $MONITORING:$COMMIT ./monitoring
+  - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
+  - docker push $MONITORING
+
+  # MONGO DB
+  - export MONGO_DB=distrlabproject/mongodb
+  - docker build -t $MONGO_DB:$COMMIT ./mongodb
+  - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
+  - docker push $MONGO_DB

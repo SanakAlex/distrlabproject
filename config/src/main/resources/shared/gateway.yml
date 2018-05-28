@@ -23,23 +23,23 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
-    account-service:
+    bookcase-service:
         path: /bookcase/**
         serviceId: bookcase-service
         stripPrefix: false
         sensitiveHeaders:
 
-    statistics-service:
-        path: /bucket/**
-        serviceId: bucket-service
-        stripPrefix: false
-        sensitiveHeaders:
-
-    notification-service:
-        path: /sale/**
-        serviceId: sale-service
-        stripPrefix: false
-        sensitiveHeaders:
+#    bucket-service:
+#        path: /bucket/**
+#        serviceId: bucket-service
+#        stripPrefix: false
+#        sensitiveHeaders:
+#
+#    notification-service:
+#        path: /sale/**
+#        serviceId: sale-service
+#        stripPrefix: false
+#        sensitiveHeaders:
 
 server:
   port: 4000
