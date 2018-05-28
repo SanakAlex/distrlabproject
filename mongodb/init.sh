@@ -4,7 +4,7 @@ if test -z "$MONGODB_PASSWORD"; then
     exit 1
 fi
 
-export INIT_DUMP='account-service-dump.js'
+export INIT_DUMP='bookcase-service-dump.js'
 
 auth="-u user -p $MONGODB_PASSWORD"
 
