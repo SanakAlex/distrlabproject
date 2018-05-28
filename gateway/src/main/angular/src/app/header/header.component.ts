@@ -20,10 +20,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   userSubscription: Subscription;
   user: User;
+
   constructor(private http: HttpClient,
               private router: Router,
               private filterBooksService: FilterBooksService,
-              private userService: UserService) { }
+              private userService: UserService) {
+  }
 
   ngOnInit() {
     this.searchForm = new FormGroup({
@@ -31,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       'searchType': new FormControl('Title', [Validators.required])
     });
 
-    if(localStorage.getItem('user')) {
+    if (localStorage.getItem('user')) {
       const user = localStorage.getItem('user').split('\\');
       this.userService
         .setUser(new User(user[0], user[1], user[2] ? user[2] : ''));

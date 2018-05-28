@@ -30,9 +30,11 @@ export class BookListComponent implements OnInit, OnDestroy {
     } else {
       this.filterBooksService.loadBooks()
         .subscribe((status) => {
-          if (!status) {
-            this.toastr.error('Error with loading books!');
-          }
+          // if (!status) {
+          //   this.toastr.error('Error with loading books!');
+          // }
+        }, (error) => {
+          this.toastr.error('Error with loading books!');
         })
     }
 

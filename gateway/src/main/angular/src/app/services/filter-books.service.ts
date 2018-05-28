@@ -1,13 +1,10 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {User} from "../models/user.model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {of} from "rxjs/internal/observable/of";
-import {Observable} from "rxjs/internal/Observable";
 import {Book} from "../models/book.model";
 import {BooksService} from "./books.service";
 import {Router} from "@angular/router";
-import {catchError, map} from "rxjs/operators";
+import {map} from "rxjs/operators";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -57,13 +54,9 @@ export class FilterBooksService {
         map((books: Book[]) => {
           this.booksService.setBookList(books);
           return true;
-        }),
-        catchError(this.handleError)
+        })
       )
   }
 
-  private handleError(error: Response | any) {
-    return Observable.throw(false);
-  }
 
 }

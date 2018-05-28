@@ -21,7 +21,6 @@ export class BooksService {
   }
 
   getBookList() {
-    // http.get()
     return this.bookList.slice();
   }
 
