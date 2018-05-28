@@ -90,7 +90,7 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  bookcase-mongodb:
+  bookcase-mongodb-1:
       environment:
         INIT_DUMP: bookcase-service-dump.js
         MONGODB_PASSWORD: $MONGODB_PASSWORD
@@ -100,6 +100,28 @@ services:
         options:
           max-size: "10m"
           max-file: "10"
+
+  bookcase-mongodb-2:
+        environment:
+          INIT_DUMP: bookcase-service-dump.js
+          MONGODB_PASSWORD: $MONGODB_PASSWORD
+        image: distrlabproject/mongodb
+        restart: always
+        logging:
+          options:
+            max-size: "10m"
+            max-file: "10"
+
+  bookcase-mongodb-3:
+        environment:
+          INIT_DUMP: bookcase-service-dump.js
+          MONGODB_PASSWORD: $MONGODB_PASSWORD
+        image: distrlabproject/mongodb
+        restart: always
+        logging:
+          options:
+            max-size: "10m"
+            max-file: "10"
 
   monitoring:
     environment:

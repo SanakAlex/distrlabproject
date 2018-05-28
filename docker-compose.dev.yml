@@ -30,10 +30,20 @@ services:
     ports:
       - 6000:6000
 
-  bookcase-mongodb:
+  bookcase-mongodb-1:
     build: mongodb
     ports:
       - 26000:27017
+
+  bookcase-mongodb-2:
+      build: mongodb
+      ports:
+        - 27000:27017
+
+  bookcase-mongodb-3:
+        build: mongodb
+        ports:
+          - 28000:27017
 
   monitoring:
     build: monitoring

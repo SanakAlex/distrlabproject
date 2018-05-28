@@ -64,8 +64,9 @@ public class BookcaseApplication extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/" , "/demo").permitAll()
-                .anyRequest().authenticated();
+//                .antMatchers("/" , "/demo").permitAll()
+//                .anyRequest().authenticated();
+        .anyRequest().permitAll();
     }
 
 }

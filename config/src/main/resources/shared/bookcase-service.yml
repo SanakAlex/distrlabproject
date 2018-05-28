@@ -10,7 +10,7 @@ security:
 spring:
   data:
     mongodb:
-      host: bookcase-mongodb
+      host: bookcase-mongodb-1,bookcase-mongodb-2,bookcase-mongodb-3
       username: user
       password: ${MONGODB_PASSWORD}
       database: iptstud
