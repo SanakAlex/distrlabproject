@@ -7,8 +7,8 @@
       <p class="card-text">{{book.author}} {{book.genre}}</p>
       <p class="card-text">Price: {{book.price}}</p>
       <p class="card-text">available: {{book.availableCount}}</p>
-      <a [routerLink]="[book.id]" class="btn btn-primary">More Info</a>
-      <button class="btn btn-primary" (click)="addToBag(book)">Add to bag</button>
+      <a [routerLink]="[book.id]" class="card-button btn btn-primary">More Info</a>
+      <button class="card-button btn btn-primary" (click)="addToBag(book)">Add to bag</button>
     </div>
   </div>
 </div>

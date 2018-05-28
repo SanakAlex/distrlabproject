@@ -19,12 +19,12 @@ export class AuthService {
 
   signIn(data) {
     const body = JSON.stringify(data);
-    return this.http.post(environment.url + '/signin/', body, httpOptions )
+    return this.http.post(environment.url + 'api/signin/', body, httpOptions )
   }
 
   signUp(data) {
     const body = JSON.stringify(data);
-    return this.http.post(environment.url+ '/api/signup',body, httpOptions)
+    return this.http.post(environment.url+ 'api/signup',body, httpOptions)
   }
 
 }

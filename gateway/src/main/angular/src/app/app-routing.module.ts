@@ -6,6 +6,8 @@ import {SignupComponent} from "./signup/signup.component";
 import {LoginComponent} from "./login/login.component";
 import {BookListComponent} from "./book/book-list/book-list.component";
 import {BookDetailComponent} from "./book/book-detail/book-detail.component";
+import {BagComponent} from "./bag/bag.component";
+import {AboutUsComponent} from "./about-us/about-us.component";
 
 
 const appRoutes: Routes = [
@@ -14,9 +16,11 @@ const appRoutes: Routes = [
       {path: '', component: BookListComponent, pathMatch: 'full'},
       {path: ':id', component: BookDetailComponent}
     ] },
-  { path: 'books/:book_id', component: BookComponent, data: { title: 'Book List' }, },
-  { path: 'login', component: LoginComponent, data: { title: 'Login' } },
-  { path: 'signup', component: SignupComponent, data: { title: 'Sign Up' } },
+  { path: 'books/:book_id', component: BookComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'bag', component: BagComponent },
+  { path: 'about-us', component: AboutUsComponent },
   { path: '**', redirectTo: '/books' }
 ];
 

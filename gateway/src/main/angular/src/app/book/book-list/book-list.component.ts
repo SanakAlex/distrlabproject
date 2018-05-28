@@ -4,6 +4,8 @@ import {FilterBooksService} from "../../services/filter-books.service";
 import {Subscription} from "rxjs/internal/Subscription";
 import {Router} from "@angular/router";
 import {BooksService} from "../../services/books.service";
+import {BagService} from "../../services/bag.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-book-list',
@@ -17,10 +19,13 @@ export class BookListComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private booksService: BooksService,
-              private filterBooksService: FilterBooksService) { }
+              private filterBooksService: FilterBooksService,
+              private bagService: BagService,
+              private toastr: ToastrService) {
+  }
 
   ngOnInit() {
-    if(this.booksService.getBookList()) {
+    if (this.booksService.getBookList()) {
       this.books = this.booksService.getBookList();
     } else {
       this.filterBooksService.loadBooks();
@@ -37,8 +42,9 @@ export class BookListComponent implements OnInit, OnDestroy {
     this.bookSubscription.unsubscribe();
   }
 
-  addToBag(id) {
-
+  addToBag(book: Book) {
+    this.bagService.addBagItem(book);
+    this.toastr.success(book.title + ' added to bag!');
   }
 
 }

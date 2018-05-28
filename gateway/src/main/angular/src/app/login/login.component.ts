@@ -56,8 +56,7 @@ export class LoginComponent implements OnInit {
             .setUser(new User(resp.firstName, resp.email, resp.lastName ? resp.lastName : ''));
           this.router.navigate(['books']);
         }, err => {
-          console.log(err);
-          this.message = err.error.msg;
+          this.message = "Error! Can't connect to server.";
         });
     }
   }

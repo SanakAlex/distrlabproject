@@ -12,10 +12,10 @@ import {FilterBooksService} from "./filter-books.service";
 export class BooksService {
 
   private bookList: Book[] = [
-    new Book('12qq', 'Volod', 'Volod', 'Fantastic', 345, 2, 'Volod'),
-    new Book('12qq1', 'QWER', 'QWER', 'Detective', 310, 3, 'QWER'),
-    new Book('12q1q', 'Asdfg', 'Asdfg', 'Fantastic', 23, 1, 'Asdfg'),
-    new Book('12qq2', 'Volod 2', 'Volod 2', 'Fantastic', 44, 5, 'Volod 2'),
+    new Book('12qq', 'Volod', 'Volod', 'Fantastic', 345, 2, 0,'Volod'),
+    new Book('12qq1', 'QWER', 'QWER', 'Detective', 310, 3, 0,'QWER'),
+    new Book('12q1q', 'Asdfg', 'Asdfg', 'Fantastic', 23, 1, 0,'Asdfg'),
+    new Book('12qq2', 'Volod 2', 'Volod 2', 'Fantastic', 44, 5, 0,'Volod 2'),
   ];
 
   booksSubject: Subject<Book[]> = new Subject<Book[]>();

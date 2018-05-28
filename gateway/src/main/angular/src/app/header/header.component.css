@@ -7,6 +7,8 @@ header{
 .image img{
   height: 80px;
   width: 150px;
+  cursor: pointer;
+  outline: none;
 }
 .search {
   width: 50%;

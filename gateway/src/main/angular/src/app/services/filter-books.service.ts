@@ -34,7 +34,7 @@ export class FilterBooksService {
 
   filterByInput(searchData) {
     this.http
-      .get(environment.url + '/api/book/type'
+      .get(environment.url + 'api/book/type/'
         + searchData.searchType + '/input/' + searchData.searchInput, httpOptions)
       .subscribe((books: Book[]) => {
         this.booksService.setBookList(books);
@@ -43,7 +43,7 @@ export class FilterBooksService {
   }
 
   loadBooks() {
-    this.http.get(environment.url + '/api/book', httpOptions)
+    this.http.get(environment.url + 'api/book/', httpOptions)
       .subscribe((books: Book[]) => {
         this.booksService.setBookList(books);
       })

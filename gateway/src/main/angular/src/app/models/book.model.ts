@@ -5,7 +5,8 @@ export class Book {
   genre: string;
   price: number;
   availableCount: number;
-  shortDescription?: string
+  orderedCount: number;
+  shortDescription?: string;
 
   constructor(id: string,
               title: string,
@@ -13,6 +14,7 @@ export class Book {
               genre: string,
               price: number,
               availableCount: number,
+              orderedCount: number,
               shortDescription?: string) {
     this.id = id;
     this.title = title;
@@ -20,6 +22,7 @@ export class Book {
     this.genre = genre;
     this.price = price;
     this.availableCount = availableCount;
+    this.orderedCount = orderedCount;
     this.shortDescription = shortDescription;
   }
 }

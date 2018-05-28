@@ -23,7 +23,7 @@
   </div>
   <div class="control-button align-self-baseline">
     <div *ngIf="user">
-      <button class="btn btn-outline-primary">Bag</button>
+      <button [routerLink]="['/','bag']" class="btn btn-outline-primary">Bag</button>
       <button (click)="logout()" class="btn btn-success">Log Out</button>
       <p class="user-email">{{user?.email}}</p>
     </div>

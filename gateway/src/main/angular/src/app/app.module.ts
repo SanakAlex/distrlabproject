@@ -17,6 +17,10 @@ import {BooksService} from "./services/books.service";
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookDetailComponent } from './book/book-detail/book-detail.component';
 import { BagComponent } from './bag/bag.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import {BagService} from "./services/bag.service";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
@@ -31,15 +35,23 @@ import { BagComponent } from './bag/bag.component';
     BookListComponent,
     BookDetailComponent,
     BagComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    ToastrModule.forRoot()
   ],
-  providers: [UserService, FilterBooksService, AuthService, BooksService],
+  providers: [
+    UserService,
+    FilterBooksService,
+    AuthService,
+    BooksService,
+    BagService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
