@@ -1,0 +1,29 @@
+version: '1.1'
+services:
+  rabbitmq:
+    ports:
+      - 5672:5672
+
+  config:
+    build: config
+    ports:
+      - 8888:8888
+
+  registry:
+    build: registry
+
+  gateway:
+    build: gateway
+
+  auth-service:
+    build: auth-service
+    ports:
+      - 5000:5000
+
+  statistics-service:
+    build: bookcase-service
+    ports:
+      - 7000:7000
+
+  monitoring:
+    build: monitoring
