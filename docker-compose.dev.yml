@@ -20,10 +20,20 @@ services:
     ports:
       - 5000:5000
 
-  statistics-service:
+  auth-mongodb:
+    build: mongodb
+    ports:
+      - 25000:27017
+
+  bookcase-service:
     build: bookcase-service
     ports:
-      - 7000:7000
+      - 6000:6000
+
+  bookcase-mongodb:
+    build: mongodb
+    ports:
+      - 26000:27017
 
   monitoring:
     build: monitoring
