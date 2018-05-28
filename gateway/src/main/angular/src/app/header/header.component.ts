@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {Subscription} from "rxjs/internal/Subscription";
 import {User} from "../models/user.model";
 import {UserService} from "../services/user.service";
+import {FilterBooksService} from "../services/filter-books.service";
 
 @Component({
   selector: 'app-header',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: User;
   constructor(private http: HttpClient,
               private router: Router,
+              private filterBooksService: FilterBooksService,
               private userService: UserService) { }
 
   ngOnInit() {
@@ -52,15 +54,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       searchInput: this.searchForm.get('searchInput').value,
       searchType: this.searchForm.get('searchType').value,
     };
-    console.log(this.searchData);
-    // this.http.get(environment.url + '/api/signin',this.loginData).subscribe(resp => {
-    //   this.data = resp;
-    //   console.log(resp);
-    //   // this.router.navigate(['books']);
-    // }, err => {
-    //   console.log(err);
-    //   this.message = err.error.msg;
-    // });
+    // TODO fix request with toastr
+    this.filterBooksService.filterByInput(this.searchData)
+
   }
 
   logout() {

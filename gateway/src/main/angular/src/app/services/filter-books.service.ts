@@ -7,11 +7,12 @@ import {Observable} from "rxjs/internal/Observable";
 import {Book} from "../models/book.model";
 import {BooksService} from "./books.service";
 import {Router} from "@angular/router";
+import {catchError, map} from "rxjs/operators";
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('jwtToken')
+    'Authorization':localStorage.getItem('jwtToken')
   })
 };
 
@@ -26,16 +27,16 @@ export class FilterBooksService {
   }
 
   filterByCatalog(catalog) {
+    this.http.get(environment.url + 'bookcase/searchGenre/' + catalog, httpOptions).subscribe((resp: any) => {
     // this.http.get(environment.url + '/api/'+ catalog, httpOptions).subscribe((resp: any) => {
-    //   this.booksService.setBookList(resp);
-    // }, err => {
-    // });
+      this.booksService.setBookList(resp);
+    }, err => {
+    });
   }
 
   filterByInput(searchData) {
     this.http
-      .get(environment.url + 'api/book/type/'
-        + searchData.searchType + '/input/' + searchData.searchInput, httpOptions)
+      .get(environment.url + 'bookcase/'+ searchData.searchType + '/' + searchData.searchInput, httpOptions)
       .subscribe((books: Book[]) => {
         this.booksService.setBookList(books);
         this.router.navigate(['book']);
@@ -43,9 +44,19 @@ export class FilterBooksService {
   }
 
   loadBooks() {
-    this.http.get(environment.url + 'api/book/', httpOptions)
-      .subscribe((books: Book[]) => {
-        this.booksService.setBookList(books);
-      })
+    return this.http.get(environment.url + 'bookcase/', httpOptions)
+    // return this.http.get(environment.url + 'api/book/', httpOptions)
+      .pipe(
+        map((books: Book[]) => {
+          this.booksService.setBookList(books);
+          return true;
+        }),
+        catchError(this.handleError)
+      )
   }
+
+  private handleError(error: Response | any) {
+    return Observable.throw(false);
+  }
+
 }

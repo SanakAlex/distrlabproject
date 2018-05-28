@@ -25,10 +25,15 @@ export class BookListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.booksService.getBookList()) {
+    if (this.booksService.getBookList().length) {
       this.books = this.booksService.getBookList();
     } else {
-      this.filterBooksService.loadBooks();
+      this.filterBooksService.loadBooks()
+        .subscribe((status) => {
+          if(!status) {
+            this.toastr.error('Error with loading books!');
+          }
+        })
     }
 
     this.bookSubscription = this.booksService.subscribeOnBooks()

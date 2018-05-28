@@ -8,6 +8,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../services/user.service";
 import {User} from "../models/user.model";
 import {AuthService} from "../services/auth.service";
+import {ToastrService} from "ngx-toastr";
 
 // import { of } from 'rxjs/observable/of';
 
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient,
               private router: Router,
               private userService: UserService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -51,12 +53,14 @@ export class LoginComponent implements OnInit {
       this.authService.signIn(loginData)
         .subscribe((resp: any) => {
           localStorage.setItem('jwtToken', resp.token);
-          localStorage.setItem('user', [resp.firstName, resp.email, resp.lastName ? resp.lastName : ''].join('\\'));
+          localStorage.setItem('user', [resp.login, resp.email].join('\\'));
           this.userService
-            .setUser(new User(resp.firstName, resp.email, resp.lastName ? resp.lastName : ''));
+            .setUser(new User(resp.login, resp.email));
+          this.toastr.success('Logged In!');
           this.router.navigate(['books']);
         }, err => {
-          this.message = "Error! Can't connect to server.";
+          this.message = "Error! Invalid entered data";
+          // this.toastr.error('Error!');
         });
     }
   }
