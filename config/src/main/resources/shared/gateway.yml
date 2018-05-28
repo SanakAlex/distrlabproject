@@ -24,20 +24,20 @@ zuul:
         sensitiveHeaders:
 
     account-service:
-        path: /accounts/**
-        serviceId: account-service
+        path: /bookcase/**
+        serviceId: bookcase-service
         stripPrefix: false
         sensitiveHeaders:
 
     statistics-service:
-        path: /statistics/**
-        serviceId: statistics-service
+        path: /bucket/**
+        serviceId: bucket-service
         stripPrefix: false
         sensitiveHeaders:
 
     notification-service:
-        path: /notifications/**
-        serviceId: notification-service
+        path: /sale/**
+        serviceId: sale-service
         stripPrefix: false
         sensitiveHeaders:
 

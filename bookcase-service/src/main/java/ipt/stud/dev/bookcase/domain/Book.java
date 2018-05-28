@@ -5,16 +5,14 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 @Document(collection = "books")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Book {
 
     @Id
-    private Long id;
+    private String id;
 
     @Length(min = 1, max = 500)
     private String title;
@@ -32,11 +30,13 @@ public class Book {
 
     private Integer availableCount;
 
-    public Long getId() {
+    private Integer orderedCount;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -86,5 +86,13 @@ public class Book {
 
     public void setAvailableCount(Integer availableCount) {
         this.availableCount = availableCount;
+    }
+
+    public Integer getOrderedCount() {
+        return orderedCount;
+    }
+
+    public void setOrderedCount(Integer orderedCount) {
+        this.orderedCount = orderedCount;
     }
 }
