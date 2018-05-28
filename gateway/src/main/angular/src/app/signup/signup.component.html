@@ -8,25 +8,16 @@
     <h2 class="form-signin-heading">Sign Up Now</h2>
     <form [formGroup]="signUpForm" (ngSubmit)="onSubmit($event)">
       <div class="form-group">
-        <label for="first_name">First Name</label>
+        <label for="login">Login</label>
         <input
           type="text"
-          placeholder="First Name"
-          id="first_name"
-          formControlName="firstName"
+          placeholder="Login"
+          id="login"
+          formControlName="login"
           class="form-control">
         <span
-          *ngIf="signUpForm.get('firstName').invalid && signUpForm.get('firstName').touched"
-          class="help-block">Please enter a valid email!</span>
-      </div>
-      <div class="form-group">
-        <label for="last_name">Last Name</label>
-        <input
-          type="text"
-          placeholder="Last Name"
-          id="last_name"
-          formControlName="lastName"
-          class="form-control">
+          *ngIf="signUpForm.get('login').invalid && signUpForm.get('login').touched"
+          class="help-block">Please enter a valid login!</span>
       </div>
       <div class="form-group">
         <label for="email">Email</label>

@@ -6,6 +6,7 @@ import { tap, catchError } from 'rxjs/operators';
 import {environment} from "../../environments/environment";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-signup',
@@ -20,12 +21,12 @@ export class SignupComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
-      'firstName': new FormControl(null, [Validators.required]),
-      'lastName': new FormControl(null, ),
+      'login': new FormControl(null, [Validators.required]),
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, [Validators.required]),
       'confirmPassword': new FormControl(null, [Validators.required]),
@@ -44,15 +45,16 @@ export class SignupComponent implements OnInit {
       }
     } else {
       const sendingData = {
-        firstName: this.signUpForm.get('firstName').value,
-        lastName: this.signUpForm.get('lastName').value,
+        login: this.signUpForm.get('login').value,
         email: this.signUpForm.get('email').value,
         password: this.signUpForm.get('password').value,
       };
       this.authService.signUp(sendingData).subscribe(resp => {
+        this.toastr.success('User was successfully signed up!');
         this.router.navigate(['login']);
       }, err => {
-        this.message = err.error.msg;
+        this.message = 'Error with signing up!';
+        // this.toastr.error('Error!');
       });
     }
   }
