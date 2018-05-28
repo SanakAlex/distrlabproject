@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -20,6 +21,11 @@ public class BookServiceImpl implements BookService {
     @Autowired
     public BookServiceImpl(BookRepository repository) {
         this.repository = repository;
+    }
+
+    @Override
+    public List<Book> findAll() {
+        return (List<Book>) repository.findAll();
     }
 
     @Override
@@ -55,5 +61,10 @@ public class BookServiceImpl implements BookService {
         repository.save(update);
 
         log.info("book has been updated: " + update.getTitle());
+    }
+
+    @Override
+    public Set<String> getAllGenres() {
+        return repository.getAllGenres();
     }
 }

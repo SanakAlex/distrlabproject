@@ -1,4 +1,4 @@
-version: '1'
+version: '2.2'
 services:
   rabbitmq:
     image: rabbitmq:3-management
@@ -54,6 +54,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/auth-service
     restart: always
     depends_on:
@@ -64,10 +65,21 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  auth-mongodb:
+      environment:
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      image: distrlabproject/mongodb
+      restart: always
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
+
   bookcase-service:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/bookcase-service
     restart: always
     depends_on:
@@ -77,6 +89,17 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
+
+  bookcase-mongodb:
+      environment:
+        INIT_DUMP: bookcase-service-dump.js
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      image: distrlabproject/mongodb
+      restart: always
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
 
   monitoring:
     environment:

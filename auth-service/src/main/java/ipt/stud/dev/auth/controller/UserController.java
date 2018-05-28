@@ -34,4 +34,9 @@ public class UserController {
         userService.create(user);
     }
 
+    @PreAuthorize("#oauth2.hasScope('ui')")
+    @RequestMapping(method = RequestMethod.POST)
+    public void createUserUI(@Valid @RequestBody User user) {
+        userService.create(user);
+    }
 }
