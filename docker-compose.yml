@@ -126,10 +126,10 @@ services:
       - "27019:27017"
     command: mongod --smallfiles --replSet mongodb-replica
 
-  replica-set-configurer:
+  mongodb-replica:
     environment:
       INIT_DUMP: bookcase-service-dump.js
-    build: replica-set-configurer
+    build: mongodb-replica
 
   user-service:
     environment:
