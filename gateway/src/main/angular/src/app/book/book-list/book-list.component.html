@@ -1,0 +1,15 @@
+<div class="container d-flex flex-row flex-wrap justify-content-start align-items-start">
+  <div class="card"
+       *ngFor="let book of books"
+  >
+    <div class="card-body">
+      <h5 class="card-title">{{book.title}}</h5>
+      <p class="card-text">{{book.author}} {{book.genre}}</p>
+      <p class="card-text">Price: {{book.price}}</p>
+      <p class="card-text">available: {{book.availableCount}}</p>
+      <a [routerLink]="[book.id]" class="card-button btn btn-primary">More Info</a>
+      <button class="card-button btn btn-primary" (click)="addToBag(book)">Add to bag</button>
+    </div>
+  </div>
+</div>
+

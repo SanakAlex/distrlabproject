@@ -1,0 +1,53 @@
+<div class="message-block d-flex flex-row-reverse justify-content-between align-items-start">
+  <div *ngIf="message && type==='error'" class="alert alert-danger" role="alert">
+    {{message}}
+  </div>
+  <div *ngIf="message && type==='success'" class="alert alert-success" role="alert">
+    {{message}}
+  </div>
+  <button *ngIf="bagList.length" class="order-button btn btn-outline-success">Buy</button>
+</div>
+<div class="container ">
+  <table class="table table-striped" *ngIf="bagList.length">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Ordered count</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of bagList; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td class="title">{{book.title}}</td>
+      <td>
+        <span class='control-items' (click)="minusItem(book)">-</span>
+        {{book.orderedCount}}
+        <span class='control-items' (click)="plusItem(book)">+</span>
+      </td>
+      <td>{{book.price}}</td>
+      <td>
+        <button (click)="deleteBook(book.id)" type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row"></th>
+      <td></td>
+      <td></td>
+      <td>Total</td>
+      <td>{{orderPrice}} $</td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!bagList.length" class="empty-bag-list">
+    <h4>Bag is empty</h4>
+    <button class="go-to-main-button btn btn-outline-success" routerLink="/">To main</button>
+
+  </div>
+</div>
+
+

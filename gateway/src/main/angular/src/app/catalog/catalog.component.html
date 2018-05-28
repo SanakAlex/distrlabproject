@@ -1,0 +1,10 @@
+<h3>Catalog</h3>
+<div class="catalog-list">
+  <ul class="list-group">
+    <li
+      *ngFor="let item of catalog"
+      (click)="filterItem(item[0])"
+      class="list-group-item"
+    >{{item[1]}}</li>
+  </ul>
+</div>

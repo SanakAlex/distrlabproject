@@ -1,0 +1,35 @@
+.alert{
+  width: 80%;
+  max-width: 1500px;
+}
+.order-button{
+  width: 20%;
+  max-width: 200px;
+}
+.message-block{
+  margin-bottom: 10px;
+}
+.title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  width: 30%;
+}
+.control-items{
+  width: 25px;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+}
+.empty-bag-list h4{
+  text-align: center;
+  margin: 10px auto;
+}
+.go-to-main-button{
+  display: block;
+  text-align: center;
+  margin: 30px auto 10px;
+  width: 200px;
+
+}

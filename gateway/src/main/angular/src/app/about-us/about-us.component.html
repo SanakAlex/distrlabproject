@@ -1,0 +1,9 @@
+<div class="container">
+  <h3>Our team</h3>
+  <div
+    *ngFor="let dev of developersList; let i = index"
+    class="alert alert-light"
+    role="alert">
+    {{i+1}}. {{dev}}
+  </div>
+</div>

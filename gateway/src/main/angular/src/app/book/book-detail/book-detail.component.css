@@ -1,0 +1,9 @@
+.btn-info,
+.btn-success{
+  width: 200px;
+}
+.controls a,
+.controls button{
+  display: block;
+  margin: 5px;
+}

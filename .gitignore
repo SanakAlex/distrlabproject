@@ -6,3 +6,12 @@
 # Maven
 log/
 target/
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# node_dependencies
+/node_modules
+node_modules/
