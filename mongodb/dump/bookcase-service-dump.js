@@ -4,87 +4,54 @@
 
 print('dump start');
 
-db.accounts.update(
+iptstud.books.update(
     { "_id": "demo" },
     {
     "_id": "demo",
     "lastSeen": new Date(),
     "note": "demo note",
-    "expenses": [
+    "books": [
         {
-            "amount": 1300,
-            "currency": "USD",
-            "icon": "home",
-            "period": "MONTH",
-            "title": "Rent"
+            "id": 1,
+            "title": "Awesome book",
+            "shortDescription": "Some description",
+            "author": "Some A.",
+            "genre": "criminal",
+            "price": 100,
+            "availableCount": 10,
+            "orderedCount": 0
         },
         {
-            "amount": 120,
-            "currency": "USD",
-            "icon": "utilities",
-            "period": "MONTH",
-            "title": "Utilities"
+            "id": 2,
+            "title": "The Hunger Games (part 1)",
+            "shortDescription": "about games",
+            "author": "Suzanne Collins",
+            "genre": "criminal",
+            "price": 1000,
+            "availableCount": 15,
+            "orderedCount": 0
         },
         {
-            "amount": 20,
-            "currency": "USD",
-            "icon": "meal",
-            "period": "DAY",
-            "title": "Meal"
+            "id": 3,
+            "title": "The Hunger Games (part 2)",
+            "shortDescription": "about games",
+            "author": "Suzanne Collins",
+            "genre": "criminal",
+            "price": 999,
+            "availableCount": 20,
+            "orderedCount": 0
         },
         {
-            "amount": 240,
-            "currency": "USD",
-            "icon": "gas",
-            "period": "MONTH",
-            "title": "Gas"
-        },
-        {
-            "amount": 3500,
-            "currency": "EUR",
-            "icon": "island",
-            "period": "YEAR",
-            "title": "Vacation"
-        },
-        {
-            "amount": 30,
-            "currency": "EUR",
-            "icon": "phone",
-            "period": "MONTH",
-            "title": "Phone"
-        },
-        {
-            "amount": 700,
-            "currency": "USD",
-            "icon": "sport",
-            "period": "YEAR",
-            "title": "Gym"
+            "id": 4
+            "title": "Harry Potter",
+            "shortDescription": "about Harry Potter",
+            "author": "J. K. Rowling.",
+            "genre": "fantasy",
+            "price": 99,
+            "availableCount": 100,
+            "orderedCount": 0
         }
-    ],
-    "incomes": [
-        {
-            "amount": 42000,
-            "currency": "USD",
-            "icon": "wallet",
-            "period": "YEAR",
-            "title": "Salary"
-        },
-        {
-            "amount": 500,
-            "currency": "USD",
-            "icon": "edu",
-            "period": "MONTH",
-            "title": "Scholarship"
-        }
-    ],
-    "saving": {
-            "amount": 5900,
-            "capitalization": false,
-            "currency": "USD",
-            "deposit": true,
-            "interest": 3.32
-        }
-    },
+    ]
     { upsert: true }
 );
 
