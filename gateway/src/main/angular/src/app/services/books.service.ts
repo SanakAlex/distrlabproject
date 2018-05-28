@@ -36,6 +36,7 @@ export class BooksService {
   }
 
   setBookList(books: Book[]) {
+    console.log('books: ', books);
     this.bookList = books;
     this.booksSubject.next(books);
   }

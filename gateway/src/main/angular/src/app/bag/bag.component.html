@@ -5,10 +5,10 @@
   <div *ngIf="message && type==='success'" class="alert alert-success" role="alert">
     {{message}}
   </div>
-  <button *ngIf="bagList.length" class="order-button btn btn-outline-success">Buy</button>
+  <button *ngIf="bagList?.length" class="order-button btn btn-outline-success">Buy</button>
 </div>
 <div class="container ">
-  <table class="table table-striped" *ngIf="bagList.length">
+  <table class="table table-striped" *ngIf="bagList?.length">
     <thead>
     <tr>
       <th scope="col">#</th>
@@ -43,7 +43,7 @@
     </tr>
     </tbody>
   </table>
-  <div *ngIf="!bagList.length" class="empty-bag-list">
+  <div *ngIf="!bagList?.length" class="empty-bag-list">
     <h4>Bag is empty</h4>
     <button class="go-to-main-button btn btn-outline-success" routerLink="/">To main</button>
 

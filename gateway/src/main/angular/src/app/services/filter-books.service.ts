@@ -44,6 +44,7 @@ export class FilterBooksService {
   }
 
   loadBooks() {
+    console.log('request for bookList');
     return this.http.get(environment.url + 'bookcase/', httpOptions)
     // return this.http.get(environment.url + 'api/book/', httpOptions)
       .pipe(
