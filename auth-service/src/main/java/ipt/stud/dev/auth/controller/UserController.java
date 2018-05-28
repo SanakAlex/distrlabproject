@@ -28,15 +28,15 @@ public class UserController {
         return principal;
     }
 
-    @PreAuthorize("#oauth2.hasScope('server')")
+//    @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(method = RequestMethod.POST)
     public void createUser(@Valid @RequestBody User user) {
         userService.create(user);
     }
 
-    @PreAuthorize("#oauth2.hasScope('ui')")
-    @RequestMapping(method = RequestMethod.POST)
-    public void createUserUI(@Valid @RequestBody User user) {
-        userService.create(user);
-    }
+//    @PreAuthorize("#oauth2.hasScope('ui')")
+//    @RequestMapping(method = RequestMethod.POST)
+//    public void createUserUI(@Valid @RequestBody User user) {
+//        userService.create(user);
+//    }
 }
