@@ -4,13 +4,8 @@
 
 print('dump start');
 
-iptstud.books.update(
-    { "_id": "demo" },
-    {
-    "_id": "demo",
-    "lastSeen": new Date(),
-    "note": "demo note",
-    "books": [
+db.books.insert(
+    [
         {
             "id": 1,
             "title": "Awesome book",
@@ -42,7 +37,7 @@ iptstud.books.update(
             "orderedCount": 0
         },
         {
-            "id": 4
+            "id": 4,
             "title": "Harry Potter",
             "shortDescription": "about Harry Potter",
             "author": "J. K. Rowling.",
@@ -52,7 +47,6 @@ iptstud.books.update(
             "orderedCount": 0
         }
     ]
-    { upsert: true }
 );
 
 print('dump complete');
