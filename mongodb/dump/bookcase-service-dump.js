@@ -4,7 +4,7 @@
 
 print('dump start');
 
-iptstud.books.update(
+db.books.update(
     [
         {
             "id": 1,
