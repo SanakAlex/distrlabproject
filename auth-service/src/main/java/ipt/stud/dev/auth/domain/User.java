@@ -11,6 +11,8 @@ import java.util.Collection;
 public class User implements UserDetails {
 
     @Id
+    private String login;
+
     private String email;
 
     private String password;
@@ -18,6 +20,22 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -28,10 +46,6 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
-    }
-
-    public void setUsername(String email) {
-        this.email = email;
     }
 
     public void setPassword(String password) {

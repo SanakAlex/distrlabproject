@@ -3,8 +3,11 @@ package ipt.stud.dev.bookcase.service;
 import ipt.stud.dev.bookcase.domain.Book;
 
 import java.util.List;
+import java.util.Set;
 
 public interface BookService {
+
+    List<Book> findAll();
 
     /**
      * Finds book by given title
@@ -44,4 +47,6 @@ public interface BookService {
      * @param update
      */
     void saveChanges(Book update);
+
+    Set<String> getAllGenres();
 }
