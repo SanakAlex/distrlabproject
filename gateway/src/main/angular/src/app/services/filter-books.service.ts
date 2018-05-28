@@ -16,6 +16,12 @@ const httpOptions = {
   })
 };
 
+const httpOptions1 = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,7 +51,7 @@ export class FilterBooksService {
 
   loadBooks() {
     console.log('request for bookList');
-    return this.http.get(environment.url + 'bookcase/', httpOptions)
+    return this.http.get(environment.url + 'bookcase/', httpOptions1)
     // return this.http.get(environment.url + 'api/book/', httpOptions)
       .pipe(
         map((books: Book[]) => {
