@@ -18,6 +18,7 @@ export class AuthService {
   }
 
   signIn(data) {
+    // const body = JSON.stringify(data);
     const body = JSON.stringify({
       scope: 'ui',
       username: data.email,
