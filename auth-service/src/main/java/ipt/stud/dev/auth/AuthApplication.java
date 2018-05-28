@@ -104,8 +104,8 @@ public class AuthApplication {
                     .authorizedGrantTypes("client_credentials", "refresh_token")
                     .scopes("server")
                     .and()
-                    .withClient("bucket-service")
-                    .secret(env.getProperty("BUCKET_SERVICE_PASSWORD"))
+                    .withClient("user-service")
+                    .secret(env.getProperty("USER_SERVICE_PASSWORD"))
                     .authorizedGrantTypes("client_credentials", "refresh_token")
                     .scopes("server");
             // @formatter:on

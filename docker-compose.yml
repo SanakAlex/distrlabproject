@@ -90,38 +90,72 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  bookcase-mongodb-1:
-      environment:
-        INIT_DUMP: bookcase-service-dump.js
-        MONGODB_PASSWORD: $MONGODB_PASSWORD
-      image: distrlabproject/mongodb
-      restart: always
-      logging:
-        options:
-          max-size: "10m"
-          max-file: "10"
+  mongo-primary:
+    environment:
+      INIT_DUMP: bookcase-service-dump.js
+    image: mongo:3.4
+    volumes:
+      - ./p:/data
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles --replSet mongodb-replica
 
-  bookcase-mongodb-2:
-        environment:
-          INIT_DUMP: bookcase-service-dump.js
-          MONGODB_PASSWORD: $MONGODB_PASSWORD
-        image: distrlabproject/mongodb
-        restart: always
-        logging:
-          options:
-            max-size: "10m"
-            max-file: "10"
+  mongo-secondary1:
+    environment:
+      INIT_DUMP: bookcase-service-dump.js
+    image: mongo:3.4
+    volumes:
+      - ./s1:/data
+    expose:
+      - "27017"
+    ports:
+      - "27018:27017"
+    command: mongod --smallfiles --replSet mongodb-replica
 
-  bookcase-mongodb-3:
-        environment:
-          INIT_DUMP: bookcase-service-dump.js
-          MONGODB_PASSWORD: $MONGODB_PASSWORD
-        image: distrlabproject/mongodb
-        restart: always
-        logging:
-          options:
-            max-size: "10m"
-            max-file: "10"
+  mongo-secondary2:
+    environment:
+      INIT_DUMP: bookcase-service-dump.js
+    image: mongo:3.4
+    volumes:
+      - ./s2:/data
+    expose:
+      - "27017"
+    ports:
+      - "27019:27017"
+    command: mongod --smallfiles --replSet mongodb-replica
+
+  replica-set-configurer:
+    environment:
+      INIT_DUMP: bookcase-service-dump.js
+    build: replica-set-configurer
+
+  user-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      ACCOUNT_SERVICE_PASSWORD: $USER_SERVICE_PASSWORD
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+    image: distrlabproject/user-service
+    restart: always
+    depends_on:
+      config:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  user-mongodb:
+    environment:
+      INIT_DUMP: bookcase-service-dump.js
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+    image: distrlabproject/mongodb
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   monitoring:
     environment:

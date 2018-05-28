@@ -45,10 +45,16 @@ after_success:
   - docker push $AUTH_SERVICE
 
   # BOOKCASE-SERVICE
-  - export MONITORING=distrlabproject/bookcase-service
-  - docker build -t $MONITORING:$COMMIT ./monitoring
-  - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
-  - docker push $MONITORING
+  - export BOOKCASE_SERVICE=distrlabproject/bookcase-service
+  - docker build -t $BOOKCASE_SERVICE:$COMMIT ./bookcase-service
+  - docker tag $BOOKCASE_SERVICE:$COMMIT $BOOKCASE_SERVICE:$TAG
+  - docker push $BOOKCASE_SERVICE
+
+  # BOOKCASE-SERVICE
+    - export USER_SERVICE=distrlabproject/user-service
+    - docker build -t $USER_SERVICE:$COMMIT ./user-service
+    - docker tag $USER_SERVICE:$COMMIT $USER_SERVICE:$TAG
+    - docker push $USER_SERVICE
 
   # MONITORING
   - export MONITORING=distrlabproject/monitoring
@@ -61,3 +67,9 @@ after_success:
   - docker build -t $MONGO_DB:$COMMIT ./mongodb
   - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
   - docker push $MONGO_DB
+
+  # MONGO DB
+  - export MONGO_DB_REPLICA=distrlabproject/mongodb-replica
+  - docker build -t $MONGO_DB_REPLICA:$COMMIT ./mongodb-replica
+  - docker tag $MONGO_DB_REPLICA:$COMMIT $MONGO_DB_REPLICA:$TAG
+  - docker push $MONGO_DB_REPLICA
