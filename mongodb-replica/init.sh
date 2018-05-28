@@ -13,12 +13,12 @@ if [ $? -ne 0 ]; then
   # Replicaset not yet configured
   mongo --host rs1 iptstud --eval 'rs.initiate({ "_id": "mongodb-replica", "version": 1, "members" : [ {"_id": 1, "host": "mongo-primary:27017"}, {"_id": 2, "host": "mongo-secondary2:27017"}, {"_id": 3, "host": "mongo-secondary1:27017"} ] })';
 fi
-
-export INIT_DUMP='bookcase-service-dump.js'
-# INIT DUMP EXECUTION
-(
-if test -n "$INIT_DUMP"; then
-    echo "execute dump file"
-	until mongo --host rs1 iptstud ${INIT_DUMP}; do sleep 5; done
-fi
-) &
+#
+#export INIT_DUMP='bookcase-service-dump.js'
+## INIT DUMP EXECUTION
+#(
+#if test -n "$INIT_DUMP"; then
+#    echo "execute dump file"
+#	until mongo --host rs1 iptstud ${INIT_DUMP}; do sleep 5; done
+#fi
+#) &
