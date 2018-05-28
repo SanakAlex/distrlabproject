@@ -1,26 +1,58 @@
 sudo: required
+
 services:
   - docker
+
+language: java
+jdk: oraclejdk8
+
 env:
   global:
     - REGISTRY_USER=sanakalexbuilder
     - REGISTRY_PASS=sanakalexbuilderpassword
     - secret: "something long"
+    - COMMIT=${TRAVIS_COMMIT::7}
 
-before_script:
-  - docker pull distrlabproject/repository || true
-
-script:
-  - docker build --pull --cache-from distrlabproject/repository --tag distrlabproject/repository .
-  - docker run distrlabproject/repository
-
-after_script:
-  - docker images
-
-before_deploy:
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-deploy:
-  provider: script
-  script: docker push distrlabproject/repository
-  on:
-    branch: master
+
+  #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+  # CONFIG SERVICE
+  - export CONFIG=distrlabproject/config
+  - docker build -t $CONFIG:$COMMIT ./config
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
+
+  # REGISTRY
+  - export REGISTRY=distrlabproject/registry
+  - docker build -t $REGISTRY:$COMMIT ./registry
+  - docker tag $REGISTRY:$COMMIT $REGISTRY:$TAG
+  - docker push $REGISTRY
+
+  # GATEWAY
+  - export GATEWAY=distrlabproject/gateway
+  - docker build -t $GATEWAY:$COMMIT ./gateway
+  - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
+  - docker push $GATEWAY
+
+  # AUTH SERVICE
+  - export AUTH_SERVICE=distrlabproject/auth-service
+  - docker build -t $AUTH_SERVICE:$COMMIT ./auth-service
+  - docker tag $AUTH_SERVICE:$COMMIT $AUTH_SERVICE:$TAG
+  - docker push $AUTH_SERVICE
+
+  # MONITORING
+  - export MONITORING=distrlabproject/monitoring
+  - docker build -t $MONITORING:$COMMIT ./monitoring
+  - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
+  - docker push $MONITORING
+
+  # BOOKCASE-SERVICE
+  - export MONITORING=distrlabproject/bookcase-service
+  - docker build -t $MONITORING:$COMMIT ./monitoring
+  - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
+  - docker push $MONITORING
+
