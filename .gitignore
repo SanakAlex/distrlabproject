@@ -14,14 +14,3 @@ target/
 
 # node_dependencies
 /node_modules
-
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
-# System Files
-.DS_Store
-Thumbs.db
