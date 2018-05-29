@@ -94,8 +94,8 @@ services:
     environment:
       INIT_DUMP: bookcase-service-dump.js
     image: mongo:3.4
-    volumes:
-      - ./p:/data
+#    volumes:
+#      - ./p:/data
     expose:
       - "27017"
     ports:
@@ -106,8 +106,8 @@ services:
     environment:
       INIT_DUMP: bookcase-service-dump.js
     image: mongo:3.4
-    volumes:
-      - ./s1:/data
+#    volumes:
+#      - ./s1:/data
     expose:
       - "27017"
     ports:
@@ -118,8 +118,8 @@ services:
     environment:
       INIT_DUMP: bookcase-service-dump.js
     image: mongo:3.4
-    volumes:
-      - ./s2:/data
+#    volumes:
+#      - ./s2:/data
     expose:
       - "27017"
     ports:
