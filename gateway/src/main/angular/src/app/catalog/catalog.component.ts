@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FilterBooksService} from "../services/filter-books.service";
+import {GenresService} from "../services/genres.service";
 
 @Component({
   selector: 'app-catalog',
@@ -8,23 +9,21 @@ import {FilterBooksService} from "../services/filter-books.service";
 })
 export class CatalogComponent implements OnInit {
 
-  catalog: any[] = [
-    ['For_kids','For kids'],
-    ['Medicine','Medicine'],
-    ['Art','Art'],
-    ['Encyclopedias','Encyclopedias'],
-    ['Legal_literature','Legal literature'],
-    ['Pedagogy','Pedagogy'],
-    ['Science','Science'],
-    ['Fantastic','Fantastic'],
-    ['Detectives','Detectives'],
+  catalog: string[] = [
   ];
-  constructor(private filterBooksService: FilterBooksService) { }
+  constructor(private filterBooksService: FilterBooksService,
+              private genresService: GenresService) { }
 
   ngOnInit() {
+    this.genresService.loadGenres()
+      .subscribe((genres: string[])=> {
+        this.catalog = genres;
+      });
+
   }
 
   filterItem(item) {
+
     this.filterBooksService.filterByCatalog(item);
   }
 

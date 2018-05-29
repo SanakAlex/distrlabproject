@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.searchForm = new FormGroup({
       'searchInput': new FormControl(null, [Validators.required, Validators.email]),
-      'searchType': new FormControl('Title', [Validators.required])
+      'searchType': new FormControl('searchTitle', [Validators.required])
     });
 
     if (localStorage.getItem('user')) {
@@ -42,7 +42,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.user = this.userService.getUser();
     this.userSubscription = this.userService.subscribeOnUser()
       .subscribe((user: User) => {
-
         this.user = user
       });
   }
@@ -65,7 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('user');
     this.userService.removeUser();
-    this.router.navigate(['book']);
+    this.router.navigate(['/login']);
   }
 
 }

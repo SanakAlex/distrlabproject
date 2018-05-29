@@ -21,6 +21,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import {BagService} from "./services/bag.service";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AuthGuard} from "./services/auth-guard.service";
+import { CreateBookComponent } from './book/create-book/create-book.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import {GenresService} from "./services/genres.service";
 
 
 
@@ -36,6 +40,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     BookDetailComponent,
     BagComponent,
     AboutUsComponent,
+    CreateBookComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +57,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     FilterBooksService,
     AuthService,
     BooksService,
+    AuthGuard,
+    GenresService,
     BagService],
   bootstrap: [AppComponent]
 })

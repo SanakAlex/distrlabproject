@@ -8,20 +8,24 @@ import {BookListComponent} from "./book/book-list/book-list.component";
 import {BookDetailComponent} from "./book/book-detail/book-detail.component";
 import {BagComponent} from "./bag/bag.component";
 import {AboutUsComponent} from "./about-us/about-us.component";
+import {AuthGuard} from "./services/auth-guard.service";
+import {CreateBookComponent} from "./book/create-book/create-book.component";
+import {ContactUsComponent} from "./contact-us/contact-us.component";
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/books', pathMatch: 'full'},
-  { path: 'books', component: BookComponent, children: [
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: 'books', canActivate: [AuthGuard], component: BookComponent, children: [
       {path: '', component: BookListComponent, pathMatch: 'full'},
+      {path: 'new-book', component: CreateBookComponent},
       {path: ':id', component: BookDetailComponent}
     ] },
-  { path: 'books/:book_id', component: BookComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'bag', component: BagComponent },
-  { path: 'about-us', component: AboutUsComponent },
-  { path: '**', redirectTo: '/books' }
+  { path: 'bag', canActivate: [AuthGuard], component: BagComponent },
+  { path: 'about-us', canActivate: [AuthGuard], component: AboutUsComponent },
+  { path: 'contact-us', canActivate: [AuthGuard], component: ContactUsComponent },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

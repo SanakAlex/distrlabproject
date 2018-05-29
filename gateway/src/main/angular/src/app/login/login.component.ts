@@ -9,6 +9,8 @@ import {UserService} from "../services/user.service";
 import {User} from "../models/user.model";
 import {AuthService} from "../services/auth.service";
 import {ToastrService} from "ngx-toastr";
+import {BooksService} from "../services/books.service";
+import {FilterBooksService} from "../services/filter-books.service";
 
 // import { of } from 'rxjs/observable/of';
 
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient,
               private router: Router,
               private userService: UserService,
+              private filterBooksService: FilterBooksService,
               private authService: AuthService,
               private toastr: ToastrService) {
   }
@@ -56,11 +59,11 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user', [resp.login, resp.email].join('\\'));
           this.userService
             .setUser(new User(resp.login, resp.email));
+          this.filterBooksService.loadBooks();
           this.toastr.success('Logged In!');
           this.router.navigate(['books']);
         }, err => {
           this.message = "Error! Invalid entered data";
-          // this.toastr.error('Error!');
         });
     }
   }

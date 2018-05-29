@@ -13,11 +13,6 @@ const httpOptions = {
   })
 };
 
-const httpOptions1 = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +43,7 @@ export class FilterBooksService {
 
   loadBooks() {
     console.log('request for bookList');
-    return this.http.get(environment.url + 'bookcase/', httpOptions1)
+    return this.http.get(environment.url + 'bookcase/', httpOptions)
     // return this.http.get(environment.url + 'api/book/', httpOptions)
       .pipe(
         map((books: Book[]) => {
@@ -56,6 +51,21 @@ export class FilterBooksService {
           return true;
         })
       )
+  }
+
+  addBook(bookData) {
+    const body = JSON.stringify({
+      title: bookData.title,
+      author: bookData.author,
+      genre: bookData.genre,
+      price: bookData.price,
+      availableCount: 0,
+      orderedCount: 0,
+      shortDescription: bookData.shortDescription ? bookData.shortDescription : '',
+    });
+    return this.http.post(environment.url+ 'bookcase/',body, httpOptions);
+    // return this.http.post(environment.url+ 'api/book',body, httpOptions)
+
   }
 
 
