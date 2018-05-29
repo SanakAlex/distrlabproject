@@ -30,6 +30,10 @@ services:
     ports:
       - 6000:6000
 
+  bookcase-mongodb:
+    build: mongodb
+    ports:
+      - 26000:27017
   mongo-primary:
     image: mongo:3.4
     volumes:
@@ -68,10 +72,10 @@ services:
     ports:
       - 7000:7000
 
-  user-mongodb:
-    build: mongodb
-    ports:
-      - 26000:27017
+#  user-mongodb:
+#    build: mongodb
+#    ports:
+#      - 26000:27017
 
 #  bookcase-mongodb:
 #    build: mongodb
