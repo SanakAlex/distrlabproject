@@ -138,7 +138,7 @@ services:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       ACCOUNT_SERVICE_PASSWORD: $USER_SERVICE_PASSWORD
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
+#      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/user-service
     restart: always
     depends_on:
