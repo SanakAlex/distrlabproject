@@ -1,7 +1,7 @@
-package ipt.stud.dev.bookcase;
+package ipt.stud.dev.user;
 
 import feign.RequestInterceptor;
-import ipt.stud.dev.bookcase.service.security.CustomUserInfoTokenServices;
+import ipt.stud.dev.user.service.security.CustomUserInfoTokenServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,13 +31,13 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties
 @Configuration
-public class BookcaseApplication{
+public class UserApplication extends ResourceServerConfigurerAdapter {
 
-//    @Autowired
-//    private ResourceServerProperties sso;
+    @Autowired
+    private ResourceServerProperties sso;
 
     public static void main(String[] args) {
-        SpringApplication.run(BookcaseApplication.class, args);
+        SpringApplication.run(UserApplication.class, args);
     }
 
     @Bean
@@ -56,10 +56,15 @@ public class BookcaseApplication{
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
 
+    @Bean
+    public ResourceServerTokenServices tokenServices() {
+        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+    }
 
-
-//    @Bean
-//    public ResourceServerTokenServices tokenServices() {
-//        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-//    }
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/" , "/demo").permitAll()
+                .anyRequest().authenticated();
+    }
 }

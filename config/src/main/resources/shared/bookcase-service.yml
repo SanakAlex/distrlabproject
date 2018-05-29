@@ -10,11 +10,11 @@ security:
 spring:
   data:
     mongodb:
-      host: bookcase-mongodb-1,bookcase-mongodb-2,bookcase-mongodb-3
-      username: user
-      password: ${MONGODB_PASSWORD}
-      database: iptstud
-      port: 27017
+      uri: mongodb://mongo-primary:27017,mongo-secondary1:27017,mongo-secondary2:27017/iptstud?replicaSet=mongodb-replica
+#      username: user
+#      password: ${MONGODB_PASSWORD}
+#      database: iptstud
+#      port: 27017
 
 server:
   context-path: /bookcase
