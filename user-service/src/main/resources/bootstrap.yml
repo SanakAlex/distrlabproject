@@ -7,3 +7,7 @@ spring:
       fail-fast: true
       password: ${CONFIG_SERVICE_PASSWORD}
       username: user
+
+  data:
+      mongodb:
+        uri: mongodb://mongo-primary:27017,mongo-secondary1:27017,mongo-secondary2:27017/iptstud?replicaSet=mongodb-replica&readPreference=secondary
