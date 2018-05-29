@@ -69,8 +69,6 @@ services:
 
   user-service:
     build: user-service
-    depends_on:
-      - mongo-primary
     ports:
       - 7000:7000
 
