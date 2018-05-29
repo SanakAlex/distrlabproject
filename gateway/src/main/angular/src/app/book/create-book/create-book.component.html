@@ -1,0 +1,64 @@
+<div class="container">
+  <form class="form-signin" [formGroup]="createBookForm" (ngSubmit)="onSubmit($event)">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        placeholder="Book title"
+        id="title"
+        formControlName="title"
+        class="form-control">
+      <span
+        *ngIf="createBookForm.get('title').invalid && createBookForm.get('title').touched"
+        class="help-block">Please enter a valid book title!</span>
+    </div>
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input
+        type="text"
+        placeholder="Author name"
+        id="author"
+        formControlName="author"
+        class="form-control">
+      <span
+        *ngIf="createBookForm.get('author').invalid && createBookForm.get('author').touched"
+        class="help-block">Please enter a valid author name!</span>
+    </div>
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <input
+        type="text"
+        placeholder="Genre"
+        id="genre"
+        formControlName="genre"
+        class="form-control">
+      <span
+        *ngIf="createBookForm.get('genre').invalid && createBookForm.get('genre').touched"
+        class="help-block">Please enter a valid genre!</span>
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input
+        type="number"
+        placeholder="Price"
+        id="price"
+        formControlName="price"
+        class="form-control">
+      <span
+        *ngIf="createBookForm.get('price').invalid && createBookForm.get('price').touched"
+        class="help-block">Please enter a valid genre!</span>
+    </div>
+    <div class="form-group">
+      <label for="shortDescription">Short description</label>
+      <textarea
+        type="number"
+        placeholder="Enter short book description"
+        id="shortDescription"
+        formControlName="shortDescription"
+        class="form-control"></textarea>
+    </div>
+    <button class="btn btn-lg btn-success btn-block"
+            type="submit" [disabled]="!createBookForm.valid">Submit
+    </button>
+  </form>
+</div>

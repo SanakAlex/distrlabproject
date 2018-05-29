@@ -2,9 +2,13 @@
 <div class="catalog-list">
   <ul class="list-group">
     <li
-      *ngFor="let item of catalog"
-      (click)="filterItem(item[0])"
+      (click)="filterItem('all')"
       class="list-group-item"
-    >{{item[1]}}</li>
+    >All</li>
+    <li
+      *ngFor="let item of catalog"
+      (click)="filterItem(item)"
+      class="list-group-item"
+    >{{item}}</li>
   </ul>
 </div>

@@ -16,9 +16,7 @@ export class BooksService {
   booksSubject: Subject<Book[]> = new Subject<Book[]>();
 
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor() { }
 
   getBookList() {
     return this.bookList.slice();
@@ -28,6 +26,11 @@ export class BooksService {
     return this.bookList.find((book: Book) => {
       return book['id'] === bookId;
     });
+  }
+
+  addBook(book) {
+    this.bookList.push(book);
+    this.setBookList(this.bookList);
   }
 
   subscribeOnBooks(): Observable<Book[]> {
