@@ -144,7 +144,7 @@ services:
     depends_on:
       config:
         condition: service_healthy
-      -mongo-primary
+#      -mongo-primary
     logging:
       options:
         max-size: "10m"
