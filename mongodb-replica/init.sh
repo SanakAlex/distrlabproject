@@ -1,7 +1,8 @@
 # Make sure 3 replicas available
-for rs in mongo-primary mongo-secondary2 mongo-secondary1
+hosts="mongo-primary mongo-secondary2 mongo-secondary1"
+for rs in ${hosts}
 do
-  mongo --host $rs --eval 'db'
+  mongo --host ${rs} --eval 'db'
   if [ $? -ne 0 ]; then
     exit 1
   fi
