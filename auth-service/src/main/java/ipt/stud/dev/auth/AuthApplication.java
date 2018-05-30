@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -37,6 +38,7 @@ public class AuthApplication {
 
     @Configuration
     @EnableWebSecurity
+    @Order(-20)
     protected static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         private final MongoUserDetailsService userDetailsService;
