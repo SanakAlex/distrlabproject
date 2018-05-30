@@ -7,6 +7,12 @@ spring:
       database: iptstud
       port: 27017
 
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+
+
 server:
   context-path: /uaa
   port: 5000

@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3'
 services:
   mongo-primary:
     image: mongo:3.4
@@ -56,8 +56,7 @@ services:
     image: distrlabproject/registry
     restart: on-failure
     depends_on:
-      config:
-        condition: service_healthy
+      - config
     ports:
       - 8761:8761
     logging:
@@ -71,8 +70,7 @@ services:
     image: distrlabproject/gateway
     restart: on-failure
     depends_on:
-      config:
-        condition: service_healthy
+      - config
     ports:
       - 80:4000
     logging:
@@ -88,8 +86,7 @@ services:
     image: distrlabproject/auth-service
     restart: on-failure
     depends_on:
-      config:
-        condition: service_healthy
+          - config
     logging:
       options:
         max-size: "10m"
@@ -113,8 +110,7 @@ services:
     image: distrlabproject/bookcase-service
     restart: on-failure
     depends_on:
-      config:
-        condition: service_healthy
+      - config
     logging:
       options:
         max-size: "10m"
@@ -132,6 +128,8 @@ services:
           max-file: "10"
 
   mongodb-replica:
+    depends_on:
+      - user-service
     build: mongodb-replica
 
   user-service:
@@ -142,9 +140,10 @@ services:
     image: distrlabproject/user-service
     restart: on-failure
     depends_on:
-      config:
-        condition: service_healthy
-#      -mongo-primary
+      - config
+      - mongo-primary
+      - mongo-secondary1
+      - mongo-secondary2
     logging:
       options:
         max-size: "10m"
@@ -167,8 +166,7 @@ services:
     image: distrlabproject/monitoring
     restart: on-failure
     depends_on:
-      config:
-        condition: service_healthy
+      - config
     ports:
       - 9000:8080
       - 8989:8989
