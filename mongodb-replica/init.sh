@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Make sure 3 replicas available
 for rs in mongo-primary mongo-secondary2 mongo-secondary1;
 do
