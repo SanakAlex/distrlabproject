@@ -8,8 +8,8 @@ import {map} from "rxjs/operators";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization':localStorage.getItem('jwtToken')
+    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+    'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
   })
 };
 
@@ -25,7 +25,7 @@ export class FilterBooksService {
   }
 
   filterByCatalog(catalog) {
-    this.http.get(environment.url + 'bookcase/searchGenre/' + catalog, httpOptions).subscribe((resp: any) => {
+    this.http.get('bookcase/searchGenre/' + catalog, httpOptions).subscribe((resp: any) => {
     // this.http.get(environment.url + '/api/'+ catalog, httpOptions).subscribe((resp: any) => {
       this.booksService.setBookList(resp);
     }, err => {
@@ -34,7 +34,7 @@ export class FilterBooksService {
 
   filterByInput(searchData) {
     this.http
-      .get(environment.url + 'bookcase/'+ searchData.searchType + '/' + searchData.searchInput, httpOptions)
+      .get('bookcase/'+ searchData.searchType + '/' + searchData.searchInput, httpOptions)
       .subscribe((books: Book[]) => {
         this.booksService.setBookList(books);
         this.router.navigate(['book']);
@@ -43,7 +43,7 @@ export class FilterBooksService {
 
   loadBooks() {
     console.log('request for bookList');
-    return this.http.get(environment.url + 'bookcase/', httpOptions)
+    return this.http.get('bookcase/', httpOptions)
     // return this.http.get(environment.url + 'api/book/', httpOptions)
       .pipe(
         map((books: Book[]) => {
@@ -63,7 +63,7 @@ export class FilterBooksService {
       orderedCount: 0,
       shortDescription: bookData.shortDescription ? bookData.shortDescription : '',
     });
-    return this.http.post(environment.url+ 'bookcase/',body, httpOptions);
+    return this.http.post('bookcase/',body, httpOptions);
     // return this.http.post(environment.url+ 'api/book',body, httpOptions)
 
   }

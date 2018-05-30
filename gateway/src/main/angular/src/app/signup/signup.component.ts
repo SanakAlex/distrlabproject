@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from "@angular/router";
-// import { Observable } from 'rxjs/Observable';
-import { tap, catchError } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
@@ -21,7 +19,8 @@ export class SignupComponent implements OnInit {
   constructor(private http: HttpClient,
               private router: Router,
               private authService: AuthService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService) {
+  }
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
@@ -48,14 +47,24 @@ export class SignupComponent implements OnInit {
         email: this.signUpForm.get('email').value,
         password: this.signUpForm.get('password').value,
       };
-      this.authService.signUp(sendingData).subscribe(resp => {
-        this.toastr.success('User was successfully signed up!');
-        this.router.navigate(['login']);
+      this.authService.signUp(sendingData).subscribe(data => {
+        this.saveData(data);
+
       }, err => {
         this.message = 'Error with signing up!';
         // this.toastr.error('Error!');
       });
     }
   }
+
+  saveData(data) {
+    localStorage.setItem('login', data.login);
+    localStorage.setItem('email', data.email);
+    this.toastr.success('User successfully signed up!');
+    this.router.navigate(['login']);
+  }
+
+
+
 
 }

@@ -7,16 +7,16 @@
     </div>
     <h2 class="form-signin-heading">Please log in</h2>
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="username">Username</label>
       <input
-        type="email"
-        placeholder="Email"
-        id="email"
-        formControlName="email"
+        type="text"
+        placeholder="Username"
+        id="username"
+        formControlName="username"
         class="form-control">
       <span
-        *ngIf="logInForm.get('email').invalid && logInForm.get('email').touched"
-        class="help-block">Please enter a valid email!</span>
+        *ngIf="logInForm.get('username').invalid && logInForm.get('username').touched"
+        class="help-block">Please enter a valid username!</span>
     </div>
     <div class="form-group">
       <label for="password">Enter your password*</label>
