@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -65,6 +66,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Set<String> getAllGenres() {
-        return repository.getAllGenres();
+        Set<Book> books = repository.findAllGenreAndExcludeId();
+        return books.stream().map(Book::getGenre).collect(Collectors.toSet());
     }
 }

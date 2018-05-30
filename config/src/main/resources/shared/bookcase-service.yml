@@ -2,7 +2,7 @@ security:
   oauth2:
     client:
       clientId: bookcase-service
-      clientSecret: ${BOOKCASE_SERVICE_PASSWORD}
+      clientSecret: secret
       accessTokenUri: http://auth-service:5000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
@@ -10,11 +10,11 @@ security:
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo-primary:27017,mongo-secondary1:27017,mongo-secondary2:27017/iptstud?replicaSet=mongodb-replica
-#      username: user
-#      password: ${MONGODB_PASSWORD}
-#      database: iptstud
-#      port: 27017
+      host: bookcase-mongodb
+      username: user
+      password: secret
+      database: iptstud
+      port: 27017
 
 server:
   context-path: /bookcase

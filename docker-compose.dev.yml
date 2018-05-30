@@ -30,6 +30,10 @@ services:
     ports:
       - 6000:6000
 
+  bookcase-mongodb:
+    build: mongodb
+    ports:
+      - 26000:27017
   mongo-primary:
     image: mongo:3.4
     volumes:
@@ -60,18 +64,18 @@ services:
       - "27019:27017"
     command: mongod --smallfiles --replSet mongodb-replica
 
-  replica-set-configurer:
-    build: replica-set-configurer
+  mongodb-replica:
+    build: mongodb-replica
 
   user-service:
     build: user-service
     ports:
       - 7000:7000
 
-  user-mongodb:
-    build: mongodb
-    ports:
-      - 26000:27017
+#  user-mongodb:
+#    build: mongodb
+#    ports:
+#      - 26000:27017
 
 #  bookcase-mongodb:
 #    build: mongodb

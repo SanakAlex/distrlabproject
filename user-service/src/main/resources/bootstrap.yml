@@ -5,5 +5,9 @@ spring:
     config:
       uri: http://config:8888
       fail-fast: true
-      password: ${CONFIG_SERVICE_PASSWORD}
+      password: secret
       username: user
+
+  data:
+      mongodb:
+        uri: mongodb://mongo-primary:27017,mongo-secondary1:27017,mongo-secondary2:27017/iptstud?replicaSet=mongodb-replica&readPreference=secondary

@@ -37,12 +37,12 @@ public class AuthApplication {
 
     @Configuration
     @EnableWebSecurity
-    protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {
+    protected static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         private final MongoUserDetailsService userDetailsService;
 
         @Autowired
-        public webSecurityConfig(MongoUserDetailsService userDetailsService) {
+        public WebSecurityConfig(MongoUserDetailsService userDetailsService) {
             this.userDetailsService = userDetailsService;
         }
 
@@ -79,13 +79,10 @@ public class AuthApplication {
 
         private final MongoUserDetailsService userDetailsService;
 
-        private final Environment env;
-
         @Autowired
-        public OAuth2AuthorizationConfig(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager, MongoUserDetailsService userDetailsService, Environment env) {
+        public OAuth2AuthorizationConfig(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager, MongoUserDetailsService userDetailsService) {
             this.authenticationManager = authenticationManager;
             this.userDetailsService = userDetailsService;
-            this.env = env;
         }
 
         @Override
@@ -96,16 +93,17 @@ public class AuthApplication {
             // @formatter:off
             clients.inMemory()
                     .withClient("browser")
+                    .secret("secret")
                     .authorizedGrantTypes("refresh_token", "password")
                     .scopes("ui")
                     .and()
                     .withClient("book-service")
-                    .secret(env.getProperty("BOOK_SERVICE_PASSWORD"))
+                    .secret("secret")
                     .authorizedGrantTypes("client_credentials", "refresh_token")
                     .scopes("server")
                     .and()
                     .withClient("user-service")
-                    .secret(env.getProperty("USER_SERVICE_PASSWORD"))
+                    .secret("secret")
                     .authorizedGrantTypes("client_credentials", "refresh_token")
                     .scopes("server");
             // @formatter:on

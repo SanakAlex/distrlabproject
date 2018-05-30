@@ -8,18 +8,18 @@ public class User {
 
     @NotNull
     @Length(min = 3, max = 20)
-    private String login;
+    private String username;
 
     @NotNull
     @Length(min = 6, max = 40)
     private String password;
 
     public String getUsername() {
-        return login;
+        return username;
     }
 
     public void setUsername(String username) {
-        this.login = username;
+        this.username = username;
     }
 
     public String getPassword() {

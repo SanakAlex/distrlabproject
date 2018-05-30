@@ -3,7 +3,7 @@ spring:
     mongodb:
       host: auth-mongodb
       username: user
-      password: ${MONGODB_PASSWORD}
+      password: secret
       database: iptstud
       port: 27017
 

@@ -1,8 +1,38 @@
 version: '2.2'
 services:
+  mongo-primary:
+    image: mongo:3.4
+#    volumes:
+#      - ./p:/data
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --replSet mongodb-replica
+
+  mongo-secondary1:
+    image: mongo:3.4
+#    volumes:
+#      - ./s1:/data
+    expose:
+      - 27017
+    ports:
+      - 27018:27017
+    command: mongod --smallfiles --replSet mongodb-replica
+
+  mongo-secondary2:
+    image: mongo:3.4
+#    volumes:
+#      - ./s2:/data
+    expose:
+      - 27017
+    ports:
+      - 27019:27017
+    command: mongod --smallfiles --replSet mongodb-replica
+
   rabbitmq:
     image: rabbitmq:3-management
-    restart: always
+    restart: on-failure
     ports:
       - 15672:15672
     logging:
@@ -11,20 +41,20 @@ services:
         max-file: "10"
 
   config:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: distrlabproject/config
-    restart: always
+    restart: on-failure
     logging:
       options:
         max-size: "10m"
         max-file: "10"
 
   registry:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: distrlabproject/registry
-    restart: always
+    restart: on-failure
     depends_on:
       config:
         condition: service_healthy
@@ -36,10 +66,10 @@ services:
         max-file: "10"
 
   gateway:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: distrlabproject/gateway
-    restart: always
+    restart: on-failure
     depends_on:
       config:
         condition: service_healthy
@@ -51,12 +81,12 @@ services:
         max-file: "10"
 
   auth-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
+#      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/auth-service
-    restart: always
+    restart: on-failure
     depends_on:
       config:
         condition: service_healthy
@@ -66,22 +96,22 @@ services:
         max-file: "10"
 
   auth-mongodb:
-      environment:
-        MONGODB_PASSWORD: $MONGODB_PASSWORD
+#      environment:
+#        MONGODB_PASSWORD: $MONGODB_PASSWORD
       image: distrlabproject/mongodb
-      restart: always
+      restart: on-failure
       logging:
         options:
           max-size: "10m"
           max-file: "10"
 
   bookcase-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
+#      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/bookcase-service
-    restart: always
+    restart: on-failure
     depends_on:
       config:
         condition: service_healthy
@@ -90,78 +120,52 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  mongo-primary:
-    environment:
-      INIT_DUMP: bookcase-service-dump.js
-    image: mongo:3.4
-    volumes:
-      - ./p:/data
-    expose:
-      - "27017"
-    ports:
-      - "27017:27017"
-    command: mongod --smallfiles --replSet mongodb-replica
-
-  mongo-secondary1:
-    environment:
-      INIT_DUMP: bookcase-service-dump.js
-    image: mongo:3.4
-    volumes:
-      - ./s1:/data
-    expose:
-      - "27017"
-    ports:
-      - "27018:27017"
-    command: mongod --smallfiles --replSet mongodb-replica
-
-  mongo-secondary2:
-    environment:
-      INIT_DUMP: bookcase-service-dump.js
-    image: mongo:3.4
-    volumes:
-      - ./s2:/data
-    expose:
-      - "27017"
-    ports:
-      - "27019:27017"
-    command: mongod --smallfiles --replSet mongodb-replica
+  bookcase-mongodb:
+      environment:
+        INIT_DUMP: bookcase-service-dump.js
+#        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      image: distrlabproject/mongodb
+      restart: on-failure
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
 
   mongodb-replica:
-    environment:
-      INIT_DUMP: bookcase-service-dump.js
     build: mongodb-replica
 
   user-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      ACCOUNT_SERVICE_PASSWORD: $USER_SERVICE_PASSWORD
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      ACCOUNT_SERVICE_PASSWORD: $USER_SERVICE_PASSWORD
+#      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/user-service
-    restart: always
+    restart: on-failure
     depends_on:
       config:
         condition: service_healthy
+#      -mongo-primary
     logging:
       options:
         max-size: "10m"
         max-file: "10"
 
-  user-mongodb:
-    environment:
-      INIT_DUMP: bookcase-service-dump.js
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
-    image: distrlabproject/mongodb
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
+#  user-mongodb:
+#    environment:
+#      INIT_DUMP: bookcase-service-dump.js
+#      MONGODB_PASSWORD: $MONGODB_PASSWORD
+#    image: distrlabproject/mongodb
+#    restart: always
+#    logging:
+#      options:
+#        max-size: "10m"
+#        max-file: "10"
 
   monitoring:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: distrlabproject/monitoring
-    restart: always
+    restart: on-failure
     depends_on:
       config:
         condition: service_healthy

@@ -31,10 +31,14 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties
 @Configuration
-public class BookcaseApplication{
+public class BookcaseApplication extends ResourceServerConfigurerAdapter{
 
-//    @Autowired
-//    private ResourceServerProperties sso;
+    private final ResourceServerProperties sso;
+
+    @Autowired
+    public BookcaseApplication(ResourceServerProperties sso) {
+        this.sso = sso;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(BookcaseApplication.class, args);
@@ -56,7 +60,17 @@ public class BookcaseApplication{
         return new OAuth2RestTemplate(clientCredentialsResourceDetails());
     }
 
+    @Bean
+    public ResourceServerTokenServices tokenServices() {
+        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+    }
 
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated();
+    }
 
 //    @Bean
 //    public ResourceServerTokenServices tokenServices() {

@@ -1,17 +1,17 @@
 #!/bin/bash
-if test -z "$MONGODB_PASSWORD"; then
-    echo "MONGODB_PASSWORD not defined"
+if test -z "secret"; then
+    echo "secret not defined"
     exit 1
 fi
 
 export INIT_DUMP='bookcase-service-dump.js'
 
-auth="-u user -p $MONGODB_PASSWORD"
+auth="-u user -p secret"
 
 # MONGODB USER CREATION
 (
 echo "setup mongodb auth"
-create_user="if (!db.getUser('user')) { db.createUser({ user: 'user', pwd: '$MONGODB_PASSWORD', roles: [ {role:'readWrite', db:'iptstud'} ]}) }"
+create_user="if (!db.getUser('user')) { db.createUser({ user: 'user', pwd: 'secret', roles: [ {role:'readWrite', db:'iptstud'} ]}) }"
 until mongo iptstud --eval "$create_user" || mongo iptstud $auth --eval "$create_user"; do sleep 5; done
 killall mongod
 sleep 1

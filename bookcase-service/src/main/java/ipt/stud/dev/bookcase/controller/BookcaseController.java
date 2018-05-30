@@ -20,19 +20,16 @@ public class BookcaseController {
         return bookService.findAll();
     }
 
-//    @PreAuthorize("#oauth2.hasScope('server') or #name.equals('demo')")
     @RequestMapping(path = "/searchTitle/{name}", method = RequestMethod.GET)
     public List<Book> getBookByTitle(@PathVariable String name) {
         return bookService.findByTitle(name);
     }
 
-//    @PreAuthorize("#oauth2.hasScope('ui') or #name.equals('demo')")
     @RequestMapping(path = "/searchGenre/{name}", method = RequestMethod.GET)
     public List<Book> getBookByGenre(@PathVariable String name) {
         return bookService.findByGenre(name);
     }
 
-//    @PreAuthorize("#oauth2.hasScope('ui') or #name.equals('demo')")
     @RequestMapping(path = "/searchAuthor/{name}", method = RequestMethod.GET)
     public List<Book> getBookByAuthor(@PathVariable String name) {
         return bookService.findByAuthor(name);
