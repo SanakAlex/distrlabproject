@@ -75,6 +75,7 @@ public class AuthApplication {
 
         private TokenStore tokenStore = new InMemoryTokenStore();
 
+        @Qualifier("authenticationManagerBean")
         private final AuthenticationManager authenticationManager;
 
         private final MongoUserDetailsService userDetailsService;
