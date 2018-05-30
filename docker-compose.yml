@@ -162,8 +162,8 @@ services:
 #        max-file: "10"
 
   monitoring:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: distrlabproject/monitoring
     restart: always
     depends_on:
