@@ -11,8 +11,8 @@ services:
         max-file: "10"
 
   config:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: distrlabproject/config
     restart: always
     logging:
@@ -21,8 +21,8 @@ services:
         max-file: "10"
 
   registry:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: distrlabproject/registry
     restart: always
     depends_on:
@@ -36,8 +36,8 @@ services:
         max-file: "10"
 
   gateway:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: distrlabproject/gateway
     restart: always
     depends_on:
@@ -51,10 +51,10 @@ services:
         max-file: "10"
 
   auth-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
+#      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/auth-service
     restart: always
     depends_on:
@@ -66,8 +66,8 @@ services:
         max-file: "10"
 
   auth-mongodb:
-      environment:
-        MONGODB_PASSWORD: $MONGODB_PASSWORD
+#      environment:
+#        MONGODB_PASSWORD: $MONGODB_PASSWORD
       image: distrlabproject/mongodb
       restart: always
       logging:
@@ -76,10 +76,10 @@ services:
           max-file: "10"
 
   bookcase-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
-      MONGODB_PASSWORD: $MONGODB_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      BOOKCASE_SERVICE_PASSWORD: $BOOKCASE_SERVICE_PASSWORD
+#      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/bookcase-service
     restart: always
     depends_on:
@@ -93,7 +93,7 @@ services:
   bookcase-mongodb:
       environment:
         INIT_DUMP: bookcase-service-dump.js
-        MONGODB_PASSWORD: $MONGODB_PASSWORD
+#        MONGODB_PASSWORD: $MONGODB_PASSWORD
       image: distrlabproject/mongodb
       restart: always
       logging:
@@ -135,9 +135,9 @@ services:
     build: mongodb-replica
 
   user-service:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-      ACCOUNT_SERVICE_PASSWORD: $USER_SERVICE_PASSWORD
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      ACCOUNT_SERVICE_PASSWORD: $USER_SERVICE_PASSWORD
 #      MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: distrlabproject/user-service
     restart: always

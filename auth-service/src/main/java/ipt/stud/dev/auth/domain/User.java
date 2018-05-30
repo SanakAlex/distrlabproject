@@ -11,21 +11,13 @@ import java.util.Collection;
 public class User implements UserDetails {
 
     @Id
-    private String login;
+    private String username;
 
     private String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     @Override
@@ -35,11 +27,15 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return login;
+        return username;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

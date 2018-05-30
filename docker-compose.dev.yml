@@ -64,8 +64,8 @@ services:
       - "27019:27017"
     command: mongod --smallfiles --replSet mongodb-replica
 
-  replica-set-configurer:
-    build: replica-set-configurer
+  mongodb-replica:
+    build: mongodb-replica
 
   user-service:
     build: user-service

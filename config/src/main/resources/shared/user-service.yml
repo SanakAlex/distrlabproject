@@ -2,7 +2,7 @@ security:
   oauth2:
     client:
       clientId: user-service
-      clientSecret: ${USER_SERVICE_PASSWORD}
+      clientSecret: secret
       accessTokenUri: http://auth-service:5000/uaa/oauth/token
       grant-type: client_credentials
       scope: server
