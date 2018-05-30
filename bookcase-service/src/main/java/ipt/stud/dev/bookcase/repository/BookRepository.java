@@ -15,7 +15,6 @@ public interface BookRepository extends MongoRepository<Book, String> {
     List<Book> findByAuthorContains(String author);
     List<Book> findByGenreContains(String genre);
 
-    @Query(fields = "{'genre': 1, _id: 0}")
-    Set<String> getAllGenres();
-
+    @Query(value = "{}", fields = "{'genre': 1, _id: 0}")
+    Set<Book> findAllGenreAndExcludeId();
 }
