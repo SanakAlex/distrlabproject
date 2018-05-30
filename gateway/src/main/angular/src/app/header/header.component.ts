@@ -62,7 +62,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('user');
     this.userService.removeUser();
     this.router.navigate(['/login']);
   }
