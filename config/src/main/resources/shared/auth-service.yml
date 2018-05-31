@@ -6,12 +6,6 @@ spring:
       password: secret
       database: iptstud
       port: 27017
-#
-#security:
-#  oauth2:
-#    resource:
-#      filter-order: 3
-
 
 server:
   context-path: /uaa

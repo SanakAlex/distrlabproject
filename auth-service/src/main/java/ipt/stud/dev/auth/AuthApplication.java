@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +39,7 @@ public class AuthApplication {
 
     @Configuration
     @EnableWebSecurity
-    @Order(-20)
+    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
     protected static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         private final MongoUserDetailsService userDetailsService;

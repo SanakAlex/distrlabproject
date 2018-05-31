@@ -1,7 +1,5 @@
 security:
-#  oauth2:
-#    resource:
-#      filter-order: 3
+  oauth2:
     client:
       clientId: bookcase-service
       clientSecret: secret

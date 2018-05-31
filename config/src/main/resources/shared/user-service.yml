@@ -1,7 +1,5 @@
 security:
   oauth2:
-#    resource:
-#      filter-order: 3
     client:
       clientId: user-service
       clientSecret: secret

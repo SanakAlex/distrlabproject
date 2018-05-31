@@ -34,53 +34,11 @@ services:
     build: mongodb
     ports:
       - 26000:27017
-  mongo-primary:
-    image: mongo:3.4
-    volumes:
-      - ./p:/data
-    expose:
-      - "27017"
-    ports:
-      - "27017:27017"
-    command: mongod --smallfiles --replSet mongodb-replica
-
-  mongo-secondary1:
-    image: mongo:3.4
-    volumes:
-      - ./s1:/data
-    expose:
-      - "27017"
-    ports:
-      - "27018:27017"
-    command: mongod --smallfiles --replSet mongodb-replica
-
-  mongo-secondary2:
-    image: mongo:3.4
-    volumes:
-      - ./s2:/data
-    expose:
-      - "27017"
-    ports:
-      - "27019:27017"
-    command: mongod --smallfiles --replSet mongodb-replica
-
-  mongodb-replica:
-    build: mongodb-replica
 
   user-service:
     build: user-service
     ports:
       - 7000:7000
-
-#  user-mongodb:
-#    build: mongodb
-#    ports:
-#      - 26000:27017
-
-#  bookcase-mongodb:
-#    build: mongodb
-#    ports:
-#      - 26000:27017
 
   monitoring:
     build: monitoring
