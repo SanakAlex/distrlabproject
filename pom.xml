@@ -19,6 +19,8 @@
         <module>auth-service</module>
         <module>bookcase-service</module>
         <module>user-service</module>
+        <module>bucket-service</module>
+        <module>hazelcast-server</module>
     </modules>
     
 </project>

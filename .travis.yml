@@ -56,6 +56,12 @@ after_success:
   - docker tag $USER_SERVICE:$COMMIT $USER_SERVICE:$TAG
   - docker push $USER_SERVICE
 
+  # BUCKET-SERVICE
+  - export BUCKET_SERVICE=distrlabproject/bucket-service
+  - docker build -t $BUCKET_SERVICE:$COMMIT ./user-service
+  - docker tag $BUCKET_SERVICE:$COMMIT $BUCKET_SERVICE:$TAG
+  - docker push $BUCKET_SERVICE
+
   # MONITORING
   - export MONITORING=distrlabproject/monitoring
   - docker build -t $MONITORING:$COMMIT ./monitoring
@@ -68,7 +74,7 @@ after_success:
   - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
   - docker push $MONGO_DB
 
-  # MONGO DB
+  # MONGO DB REPLICA
   - export MONGO_DB_REPLICA=distrlabproject/mongodb-replica
   - docker build -t $MONGO_DB_REPLICA:$COMMIT ./mongodb-replica
   - docker tag $MONGO_DB_REPLICA:$COMMIT $MONGO_DB_REPLICA:$TAG

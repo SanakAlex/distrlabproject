@@ -109,6 +109,11 @@ public class AuthApplication {
                     .withClient("user-service")
                     .secret("secret")
                     .authorizedGrantTypes("client_credentials", "refresh_token")
+                    .scopes("server")
+                    .and()
+                    .withClient("bucket-service")
+                    .secret("secret")
+                    .authorizedGrantTypes("client_credentials", "refresh_token")
                     .scopes("server");
             // @formatter:on
         }

@@ -95,18 +95,16 @@ services:
         max-file: "10"
 
   bookcase-mongodb:
-      environment:
-        INIT_DUMP: bookcase-service-dump.js
-      image: distrlabproject/mongodb
-      restart: on-failure
-      logging:
-        options:
-          max-size: "10m"
-          max-file: "10"
+    environment:
+      INIT_DUMP: bookcase-service-dump.js
+    image: distrlabproject/mongodb
+    restart: on-failure
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
 
   mongodb-replica:
-    depends_on:
-      - user-service
     build: mongodb-replica
 
   user-service:
@@ -117,6 +115,19 @@ services:
       - mongo-primary
       - mongo-secondary1
       - mongo-secondary2
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  hazelcast-server:
+    image: distrlabproject/hazelcast
+
+  bucket-service:
+    image: distrlabproject/bucket-service
+    restart: on-failure
+    depends_on:
+      - config
     logging:
       options:
         max-size: "10m"
