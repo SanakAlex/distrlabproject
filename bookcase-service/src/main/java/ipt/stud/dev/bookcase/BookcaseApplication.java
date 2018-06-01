@@ -71,9 +71,4 @@ public class BookcaseApplication extends ResourceServerConfigurerAdapter{
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated();
     }
-
-//    @Bean
-//    public ResourceServerTokenServices tokenServices() {
-//        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
-//    }
 }

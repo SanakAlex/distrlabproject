@@ -12,8 +12,12 @@ import java.util.Set;
 @RestController
 public class BookcaseController {
 
+    private final BookService bookService;
+
     @Autowired
-    private BookService bookService;
+    public BookcaseController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public List<Book> getAllBooks() {

@@ -1,4 +1,4 @@
-package ipt.stud.dev.bucket.client;
+package ipt.stud.dev.bucket.hazelcast.client;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;

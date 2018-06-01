@@ -122,6 +122,8 @@ services:
 
   hazelcast-server:
     image: distrlabproject/hazelcast
+    expose:
+      - "5701"
 
   bucket-service:
     image: distrlabproject/bucket-service

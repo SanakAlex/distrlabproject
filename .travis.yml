@@ -79,3 +79,9 @@ after_success:
   - docker build -t $MONGO_DB_REPLICA:$COMMIT ./mongodb-replica
   - docker tag $MONGO_DB_REPLICA:$COMMIT $MONGO_DB_REPLICA:$TAG
   - docker push $MONGO_DB_REPLICA
+
+  # HAZELCAST SERVER
+  - export HAZELCAST_SERVER=distrlabproject/hazelcast
+  - docker build -t $HAZELCAST_SERVER:$COMMIT ./hazelcast-server
+  - docker tag $HAZELCAST_SERVER:$COMMIT $HAZELCAST_SERVER:$TAG
+  - docker push $HAZELCAST_SERVER

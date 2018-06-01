@@ -34,6 +34,12 @@ zuul:
         serviceId: user-service
         stripPrefix: false
         sensitiveHeaders:
+
+    bucket-service:
+        path: /bucket/**
+        serviceId: bucket-service
+        stripPrefix: false
+        sensitiveHeaders:
 #
 #    notification-service:
 #        path: /sale/**

@@ -1,7 +1,11 @@
 package ipt.stud.dev.bucket.domain;
 
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
 public class Book {
 
+    @NotNull
     private String id;
 
     private String title;
@@ -80,5 +84,26 @@ public class Book {
 
     public void setOrderedCount(Integer orderedCount) {
         this.orderedCount = orderedCount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id) &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(shortDescription, book.shortDescription) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(genre, book.genre) &&
+                Objects.equals(price, book.price) &&
+                Objects.equals(availableCount, book.availableCount) &&
+                Objects.equals(orderedCount, book.orderedCount);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, title, shortDescription, author, genre, price, availableCount, orderedCount);
     }
 }
