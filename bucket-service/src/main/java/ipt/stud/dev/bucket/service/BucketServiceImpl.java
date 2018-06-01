@@ -1,5 +1,6 @@
 package ipt.stud.dev.bucket.service;
 
+import com.hazelcast.client.HazelcastClient;
 import ipt.stud.dev.bucket.domain.Book;
 import ipt.stud.dev.bucket.domain.Bucket;
 import ipt.stud.dev.bucket.hazelcast.client.HazelcastClientTemplate;

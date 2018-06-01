@@ -13,7 +13,6 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.security.oauth2.client.feign.OAuth2FeignRequestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
@@ -32,7 +31,6 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties
 @Configuration
-//@Import(HazelcastClientConfig.class)
 public class BucketApplication extends ResourceServerConfigurerAdapter {
 
     private final ResourceServerProperties sso;

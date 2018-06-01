@@ -120,7 +120,7 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  hazelcast-server:
+  hazelcast:
     image: distrlabproject/hazelcast
     expose:
       - "5701"
