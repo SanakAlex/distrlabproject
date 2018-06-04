@@ -41,7 +41,9 @@ public class HazelcastConfig {
 
         ClientNetworkConfig network = cfg.getNetworkConfig();
         network
-                .addAddress("hazelcast", "hazelcast:5701");
+                .addAddress("hazelcast", "hazelcast:5701")
+                .addAddress("hazelcast", "localhost:5701");
+
 //                .addAddress("hazelcast", "hazelcast:5701");
 //                .addAddress("hazelcast-server", "hazelcast-server:5701");
 //                .addAddress("hazelcast-server2", "hazelcast-server2:5701")
