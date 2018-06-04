@@ -122,6 +122,9 @@ services:
 
   hazelcast:
     image: distrlabproject/hazelcast
+    depends_on:
+      - config
+      - monitoring
     expose:
       - "5701"
 

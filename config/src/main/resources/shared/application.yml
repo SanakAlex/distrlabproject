@@ -27,4 +27,4 @@ spring:
   rabbitmq:
     host: rabbitmq
   hazelcast:
-    host: hazelcast
+    name: hazelcast
