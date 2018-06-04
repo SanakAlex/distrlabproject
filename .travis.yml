@@ -58,7 +58,7 @@ after_success:
 
   # BUCKET-SERVICE
   - export BUCKET_SERVICE=distrlabproject/bucket-service
-  - docker build -t $BUCKET_SERVICE:$COMMIT ./user-service
+  - docker build -t $BUCKET_SERVICE:$COMMIT ./bucket-service
   - docker tag $BUCKET_SERVICE:$COMMIT $BUCKET_SERVICE:$TAG
   - docker push $BUCKET_SERVICE
 
@@ -82,6 +82,6 @@ after_success:
 
   # HAZELCAST SERVER
   - export HAZELCAST_SERVER=distrlabproject/hazelcast
-  - docker build -t $HAZELCAST_SERVER:$COMMIT ./hazelcast-server
+  - docker build -t $HAZELCAST_SERVER:$COMMIT ./hazelcast
   - docker tag $HAZELCAST_SERVER:$COMMIT $HAZELCAST_SERVER:$TAG
   - docker push $HAZELCAST_SERVER

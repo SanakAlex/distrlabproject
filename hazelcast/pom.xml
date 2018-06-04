@@ -5,10 +5,10 @@
     <groupId>ipt.stud.dev</groupId>
     <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>hazelcast-server</artifactId>
+    <artifactId>hazelcast</artifactId>
     <packaging>jar</packaging>
 
-    <name>hazelcast-server</name>
+    <name>hazelcast</name>
 
     <properties>
         <hazelcast.version>3.9.3</hazelcast.version>
