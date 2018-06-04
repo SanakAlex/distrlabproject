@@ -1,10 +1,13 @@
 spring:
   application:
     name: hazelcast
-  cloud:
-    config:
-      uri: http://config:8888
-#      uri: http://localhost:8888
-      fail-fast: true
-      password: secret
-      username: user
+#  cloud:
+#    config:
+#      uri: http://config:8888
+##      uri: http://localhost:8888
+#      fail-fast: true
+#      password: secret
+#      username: user
+
+server:
+  port: 5701
