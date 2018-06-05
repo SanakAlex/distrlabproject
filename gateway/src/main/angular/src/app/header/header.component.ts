@@ -29,17 +29,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.searchForm = new FormGroup({
-      'searchInput': new FormControl(null, [Validators.required, Validators.email]),
+      'searchInput': new FormControl("", [Validators.required, Validators.email]),
       'searchType': new FormControl('searchTitle', [Validators.required])
     });
-
-    if (localStorage.getItem('user')) {
-      const user = localStorage.getItem('user').split('\\');
+    if (localStorage.getItem('login') && localStorage.getItem('email')) {
       this.userService
-        .setUser(new User(user[0], user[1], user[2] ? user[2] : ''));
+        .setUser(new User(localStorage.getItem('login'), localStorage.getItem('email') ));
     }
 
     this.user = this.userService.getUser();
+    if(this.user) {
+      this.router.navigate(['books']);
+    }
     this.userSubscription = this.userService.subscribeOnUser()
       .subscribe((user: User) => {
         this.user = user
@@ -62,6 +63,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('login');
+    localStorage.removeItem('email');
     this.userService.removeUser();
     this.router.navigate(['/login']);
   }
