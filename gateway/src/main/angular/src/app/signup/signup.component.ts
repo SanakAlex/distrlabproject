@@ -47,8 +47,9 @@ export class SignupComponent implements OnInit {
         email: this.signUpForm.get('email').value,
         password: this.signUpForm.get('password').value,
       };
+
       this.authService.signUp(sendingData).subscribe(data => {
-        this.saveData(data);
+        this.showSuccess();
 
       }, err => {
         this.message = 'Error with signing up!';
@@ -57,9 +58,7 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  saveData(data) {
-    localStorage.setItem('login', data.login);
-    localStorage.setItem('email', data.email);
+  showSuccess() {
     this.toastr.success('User successfully signed up!');
     this.router.navigate(['login']);
   }

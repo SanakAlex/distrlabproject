@@ -8,10 +8,21 @@ import {map} from "rxjs/operators";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
   })
 };
+const httpOptionsBooks = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
+const httpOptionsAddBook = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+  })
+};
+
 
 
 @Injectable({
@@ -25,8 +36,8 @@ export class FilterBooksService {
   }
 
   filterByCatalog(catalog) {
-    this.http.get('bookcase/searchGenre/' + catalog, httpOptions).subscribe((resp: any) => {
-    // this.http.get(environment.url + '/api/'+ catalog, httpOptions).subscribe((resp: any) => {
+    this.http.get( 'bookcase/searchGenre/' + catalog, httpOptions).subscribe((resp: any) => {
+    // this.http.get( '/api/'+ catalog, httpOptions).subscribe((resp: any) => {
       this.booksService.setBookList(resp);
     }, err => {
     });
@@ -34,17 +45,18 @@ export class FilterBooksService {
 
   filterByInput(searchData) {
     this.http
-      .get('bookcase/'+ searchData.searchType + '/' + searchData.searchInput, httpOptions)
+      .get( 'bookcase/'+ searchData.searchType + '/' + searchData.searchInput, httpOptions)
       .subscribe((books: Book[]) => {
         this.booksService.setBookList(books);
         this.router.navigate(['book']);
+      }, () => {
+        console.log('can\'t load books');
       })
   }
 
   loadBooks() {
-    console.log('request for bookList');
-    return this.http.get('bookcase/', httpOptions)
-    // return this.http.get(environment.url + 'api/book/', httpOptions)
+    return this.http.get( 'bookcase/', httpOptionsBooks)
+    // return this.http.get( 'api/book/', httpOptions)
       .pipe(
         map((books: Book[]) => {
           this.booksService.setBookList(books);
@@ -63,9 +75,8 @@ export class FilterBooksService {
       orderedCount: 0,
       shortDescription: bookData.shortDescription ? bookData.shortDescription : '',
     });
-    return this.http.post('bookcase/',body, httpOptions);
+    return this.http.post( 'bookcase/',body, httpOptionsAddBook);
     // return this.http.post(environment.url+ 'api/book',body, httpOptions)
-
   }
 
 

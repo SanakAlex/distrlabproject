@@ -7,8 +7,8 @@ import {environment} from "../../environments/environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+    // 'Authorization': localStorage.getItem('jwtToken')
   })
 };
 
@@ -21,8 +21,9 @@ export class GenresService {
   constructor(private http: HttpClient) { }
 
   loadGenres() {
-    console.log('request for genres');
-    return this.http.get('bookcase/genres/', httpOptions)
-    // return this.http.get(environment.url + 'api/genres/', httpOptions)
+    // console.log('request for genres: ', 'bookcase/genres/' );
+    // console.log('httpOptions:  ', httpOptions );
+    return this.http.get( 'bookcase/genres/', httpOptions)
+    // return this.http.get( 'api/genres/', httpOptions)
   }
 }

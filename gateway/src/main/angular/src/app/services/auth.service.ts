@@ -6,8 +6,14 @@ import {RequestOptions} from "@angular/http";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
+    'Content-type': 'application/x-www-form-urlencoded',
     'Authorization': 'Basic ' + btoa("browser:secret")
+  })
+};
+
+const httpOptionsSignUp = {
+  headers: new HttpHeaders({
+    'Content-type': 'application/json',
   })
 };
 
@@ -26,19 +32,31 @@ export class AuthService {
     params.append('password', data.password);
     params.append('grant_type', 'password');
     params.append('scope', 'ui');
+    return this.http.post( 'uaa/oauth/token', params.toString(), httpOptions)
+    // return this.http.post( 'api/signin', body, httpOptions )
+  }
 
-    return this.http.post('uaa/oauth/token', params.toString(), httpOptions)
-    // return this.http.post(environment.url + 'api/signin', body, httpOptions )
+  getUserData(token) {
+
+    const httpOptionsGetData = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/x-www-form-urlencoded',
+        // 'Authorization': localStorage.getItem('jwtToken')
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    localStorage.setItem('jwtToken', token);
+    return this.http.get( 'users/current', httpOptionsGetData)
   }
 
   signUp(data) {
-    let params = new URLSearchParams();
-    params.append('login', data.login);
-    params.append('email', data.email);
-    params.append('password', data.password);
+    const params = {
+      login: data.login,
+      email: data.email,
+      password: data.password
+    };
 
-    // const body = JSON.stringify(data);
-    return this.http.post('users/', params.toString())
+    return this.http.post( 'users/', JSON.stringify(params), httpOptionsSignUp)
     // return this.http.post(environment.url+ 'api/signup',body, httpOptions)
   }
 

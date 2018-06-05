@@ -50,23 +50,34 @@ export class LoginComponent implements OnInit {
         username: this.logInForm.get('username').value,
         password: this.logInForm.get('password').value,
       };
-      this.authService.signIn(loginData)
-        .subscribe((resp: any) => {
-          this.saveToken(resp);
-          this.filterBooksService.loadBooks();
-          this.router.navigate(['books']);
-        }, err => {
-          this.message = "Error! Invalid entered data";
-        });
+      new Promise((resolve, reject) => {
+        this.authService.signIn(loginData)
+          .subscribe((resp: any) => {
+            resolve(resp.access_token);
+            this.saveToken(resp);
+          }, err => {
+            reject();
+              this.message = "Error! Invalid entered data";
+          })}).then((token) => {
+        this.authService.getUserData(token)
+          .subscribe((resp) => {
+            this.saveUser(resp);
+          })
+      }, (error) => {
+            console.log('Error with login')
+      });
+
     }
   }
   saveToken(token) {
     localStorage.setItem('jwtToken', token.access_token);
-    this.toastr.success('Logged In!');
-    this.userService
-      .setUser(new User(localStorage.getItem('login'), localStorage.getItem('email')));
-    console.log('User logged in');
-    this.router.navigate(['login']);
+  }
+  saveUser(user) {
+    localStorage.setItem('login', user.login);
+    localStorage.setItem('email', user.email);
+    this.userService.setUser(new User(user.login, user.email));
+    this.filterBooksService.loadBooks();
+    this.router.navigate(['books']);
   }
 
 
