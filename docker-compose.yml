@@ -126,7 +126,7 @@ services:
       - config
       - monitoring
     expose:
-      - "5701"
+      - "8701"
 
   bucket-service:
     image: distrlabproject/bucket-service

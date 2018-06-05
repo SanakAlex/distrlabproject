@@ -24,7 +24,7 @@ public class HazelcastServer {
         Config cfg = new Config();
 
         NetworkConfig network = cfg.getNetworkConfig();
-        network.setPort(5701).setPortAutoIncrement(false);
+        network.setPort(8701).setPortAutoIncrement(false);
 
         JoinConfig join = network.getJoin();
         join
@@ -32,9 +32,9 @@ public class HazelcastServer {
                 .setEnabled(false);
         join
                 .getTcpIpConfig()
-                .setEnabled(true)
+                .setEnabled(true);
 //                .addMember("localhost");
-                .addMember("hazelcast");
+//                .addMember("hazelcast");
 //                .addMember("hazelcast-server2")
 //                .addMember("hazelcast-server3");
 

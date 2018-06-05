@@ -1,12 +1,25 @@
-eureka: 
+#eureka:
+#  instance:
+#    # Uniquely name this instance
+#    instanceId: hazelcast:5701
+#    metadataMap:
+#      # Hazelcast connectivity for other Eureka clients to use, easier than tokenising instanceId
+#      instanceHost: hazelcast
+#      instancePort: 5701
+#  client:
+#    registerWithEureka: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+
+
+eureka:
   instance:
     # Uniquely name this instance
-    instanceId: hazelcast:5701
+    instanceId: hazelcast:8701
     metadataMap:
-      # Hazelcast connectivity for other Eureka clients to use, easier than tokenising instanceId 
+      # Hazelcast connectivity for other Eureka clients to use, easier than tokenising instanceId
       instanceHost: hazelcast
-      instancePort: 5701
-  client:
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      instancePort: 8701
+
+server:
+  port: 8701
