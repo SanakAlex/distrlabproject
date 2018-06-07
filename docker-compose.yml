@@ -120,13 +120,13 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  hazelcast:
-    image: distrlabproject/hazelcast
+  hazelcast-cache:
+    image: hazelcast/hazelcast
     depends_on:
       - config
       - monitoring
     expose:
-      - "8701"
+      - "5701"
 
   bucket-service:
     image: distrlabproject/bucket-service
