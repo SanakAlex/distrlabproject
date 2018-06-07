@@ -32,9 +32,9 @@ public class HazelcastServer {
                 .setEnabled(false);
         join
                 .getTcpIpConfig()
-                .setEnabled(true);
-//                .addMember("localhost");
-//                .addMember("hazelcast");
+                .setEnabled(true)
+                .addMember("localhost")
+                .addMember("hazelcast");
 //                .addMember("hazelcast-server2")
 //                .addMember("hazelcast-server3");
 
