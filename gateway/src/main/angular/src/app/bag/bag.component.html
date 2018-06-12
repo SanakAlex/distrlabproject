@@ -5,7 +5,7 @@
   <div *ngIf="message && type==='success'" class="alert alert-success" role="alert">
     {{message}}
   </div>
-  <button *ngIf="bagList?.length" class="order-button btn btn-outline-success">Buy</button>
+  <button (click)="buyBooks()" *ngIf="bagList?.length" class="order-button btn btn-outline-success">Buy</button>
 </div>
 <div class="container ">
   <table class="table table-striped" *ngIf="bagList?.length">

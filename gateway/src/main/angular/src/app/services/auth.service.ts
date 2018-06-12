@@ -46,7 +46,7 @@ export class AuthService {
       })
     };
     localStorage.setItem('jwtToken', token);
-    return this.http.get( 'users/current', httpOptionsGetData)
+    return this.http.get( environment.url + 'users/current', httpOptionsGetData)
   }
 
   signUp(data) {

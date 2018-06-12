@@ -50,15 +50,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
+  setSearchType(e) {
+    this.searchForm.get('searchType').patchValue(e.target.value);
+    this.onSubmit(e);
+  }
 
-  onSubmit() {
-    this.searchData = {
-      searchInput: this.searchForm.get('searchInput').value,
-      searchType: this.searchForm.get('searchType').value,
-    };
-    // TODO fix request with toastr
-    this.filterBooksService.filterByInput(this.searchData)
-
+  onSubmit(e) {
+    e.stopPropagation();
+    if(this.searchForm.get('searchInput').value === '') {
+      this.filterBooksService.loadBooks().subscribe();
+    } else {
+      this.searchData = {
+        searchInput: this.searchForm.get('searchInput').value,
+        searchType: this.searchForm.get('searchType').value,
+      };
+      // TODO fix request with toastr
+      this.filterBooksService.filterByInput(this.searchData);
+    }
   }
 
   logout() {

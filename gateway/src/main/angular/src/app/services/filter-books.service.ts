@@ -24,7 +24,6 @@ const httpOptionsAddBook = {
 };
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -36,30 +35,33 @@ export class FilterBooksService {
   }
 
   filterByCatalog(catalog) {
-    this.http.get( 'bookcase/searchGenre/' + catalog, httpOptions).subscribe((resp: any) => {
-    // this.http.get( '/api/'+ catalog, httpOptions).subscribe((resp: any) => {
+    this.http.get(environment.url + 'bookcase/searchGenre/' + catalog, httpOptions).subscribe((resp: any) => {
+      // this.http.get( '/api/'+ catalog, httpOptions).subscribe((resp: any) => {
       this.booksService.setBookList(resp);
+      this.router.navigate(['books']);
     }, err => {
+      console.log('can\'t load books');
     });
   }
 
   filterByInput(searchData) {
     this.http
-      .get( 'bookcase/'+ searchData.searchType + '/' + searchData.searchInput, httpOptions)
+      .get(environment.url + 'bookcase/' + searchData.searchType + '/' + searchData.searchInput, httpOptions)
       .subscribe((books: Book[]) => {
         this.booksService.setBookList(books);
-        this.router.navigate(['book']);
+        this.router.navigate(['books']);
       }, () => {
         console.log('can\'t load books');
       })
   }
 
   loadBooks() {
-    return this.http.get( 'bookcase/', httpOptionsBooks)
+    return this.http.get(environment.url + 'bookcase/', httpOptionsBooks)
     // return this.http.get( 'api/book/', httpOptions)
       .pipe(
         map((books: Book[]) => {
           this.booksService.setBookList(books);
+          this.router.navigate(['books']);
           return true;
         })
       )
@@ -75,7 +77,7 @@ export class FilterBooksService {
       orderedCount: 0,
       shortDescription: bookData.shortDescription ? bookData.shortDescription : '',
     });
-    return this.http.post( 'bookcase/',body, httpOptionsAddBook);
+    return this.http.post(environment.url + 'bookcase/', body, httpOptionsAddBook);
     // return this.http.post(environment.url+ 'api/book',body, httpOptions)
   }
 

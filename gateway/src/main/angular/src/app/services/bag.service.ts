@@ -22,8 +22,15 @@ export class BagService {
   }
 
   addBagItem(item) {
-    item.orderedCount++;
-    this.bagList.push(item);
+    const availableBook = this.bagList.find((book) => {
+      return book.id === item.id;
+    });
+    if (availableBook) {
+      availableBook.orderedCount++
+    } else {
+      item.orderedCount++;
+      this.bagList.push(item);
+    }
     this.bagSubject.next(this.bagList);
   }
 

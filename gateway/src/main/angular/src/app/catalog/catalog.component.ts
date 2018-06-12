@@ -23,7 +23,8 @@ export class CatalogComponent implements OnInit {
   }
 
   loadBooks() {
-    this.filterBooksService.loadBooks();
+    this.filterBooksService.loadBooks()
+      .subscribe()
   }
 
   filterItem(item) {
