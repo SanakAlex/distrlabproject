@@ -14,6 +14,8 @@ export class AuthGuard implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return new Promise((resolve, reject) => {
+      console.log(this.userService.getUser());
+      console.log(localStorage.getItem('jwtToken'));
       if(this.userService.getUser() && localStorage.getItem('jwtToken')) {
         resolve(true);
       } else {

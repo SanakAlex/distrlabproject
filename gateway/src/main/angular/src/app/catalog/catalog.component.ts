@@ -22,6 +22,10 @@ export class CatalogComponent implements OnInit {
 
   }
 
+  loadBooks() {
+    this.filterBooksService.loadBooks();
+  }
+
   filterItem(item) {
 
     this.filterBooksService.filterByCatalog(item);

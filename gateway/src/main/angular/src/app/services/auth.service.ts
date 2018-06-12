@@ -32,7 +32,7 @@ export class AuthService {
     params.append('password', data.password);
     params.append('grant_type', 'password');
     params.append('scope', 'ui');
-    return this.http.post( 'uaa/oauth/token', params.toString(), httpOptions)
+    return this.http.post( environment.url + 'uaa/oauth/token', params.toString(), httpOptions)
     // return this.http.post( 'api/signin', body, httpOptions )
   }
 
@@ -56,7 +56,7 @@ export class AuthService {
       password: data.password
     };
 
-    return this.http.post( 'users/', JSON.stringify(params), httpOptionsSignUp)
+    return this.http.post( environment.url + 'users/', JSON.stringify(params), httpOptionsSignUp)
     // return this.http.post(environment.url+ 'api/signup',body, httpOptions)
   }
 

@@ -23,7 +23,7 @@ export class GenresService {
   loadGenres() {
     // console.log('request for genres: ', 'bookcase/genres/' );
     // console.log('httpOptions:  ', httpOptions );
-    return this.http.get( 'bookcase/genres/', httpOptions)
+    return this.http.get( environment.url + 'bookcase/genres/', httpOptions)
     // return this.http.get( 'api/genres/', httpOptions)
   }
 }

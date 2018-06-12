@@ -70,6 +70,7 @@ export class LoginComponent implements OnInit {
     }
   }
   saveToken(token) {
+    console.log('token: ', token);
     localStorage.setItem('jwtToken', token.access_token);
   }
   saveUser(user) {

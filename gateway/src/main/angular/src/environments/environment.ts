@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:3000/api/'
+  url: ''
 };
 // http://localhost:3000/
-
+// http://localhost/
 /*
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can
