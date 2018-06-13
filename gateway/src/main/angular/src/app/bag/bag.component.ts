@@ -30,6 +30,9 @@ export class BagComponent implements OnInit {
         this.bagList = bags;
         this.countOrderPrice();
       });
+    this.bagService.loadBag()
+      .subscribe((book: Book[]) => {
+      });
   }
 
   countOrderPrice() {
@@ -39,15 +42,16 @@ export class BagComponent implements OnInit {
     }
   }
 
-  deleteBook(id) {
-    this.bagService.removeBagItem(id);
+  deleteBook(book) {
+    this.bagService.removeBagItem(book.id);
     this.countOrderPrice();
+    this.toastr.info(book.title + ' was removed');
     // TODO send request for delete book from bagList
   }
 
   buyBooks() {
     this.toastr.success('You bought new books!', 'Congratulations');
-    this.bagList = [];
+    this.bagService.removeBag();
   }
 
   minusItem(book: Book) {
