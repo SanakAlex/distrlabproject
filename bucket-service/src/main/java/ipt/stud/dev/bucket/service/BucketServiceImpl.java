@@ -34,6 +34,7 @@ public class BucketServiceImpl implements BucketService {
     public Bucket addBookToBucketByToken(String token, Book book) {
         Bucket bucket = getBucketByToken(token);
         bucket.getBooks().put(book.getId(), book);
+        bucket = hazelcastClient.putBucketToCacheByToken(token, bucket);
         return bucket;
     }
 
@@ -41,6 +42,7 @@ public class BucketServiceImpl implements BucketService {
     public Bucket deleteBookFromBucketByToken(String token, Book book) {
         Bucket bucket = getBucketByToken(token);
         bucket.getBooks().remove(book.getId());
+        bucket = hazelcastClient.putBucketToCacheByToken(token, bucket);
         return bucket;
     }
 
