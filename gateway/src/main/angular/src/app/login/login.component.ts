@@ -8,6 +8,7 @@ import {BooksService} from "../services/books.service";
 import {FilterBooksService} from "../services/filter-books.service";
 import {User} from "../models/user.model";
 import {UserService} from "../services/user.service";
+import {GenresService} from "../services/genres.service";
 
 // import { of } from 'rxjs/observable/of';
 
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
               private filterBooksService: FilterBooksService,
               private userService: UserService,
               private authService: AuthService,
+              private genresService: GenresService,
               private toastr: ToastrService) {
   }
 
@@ -55,6 +57,7 @@ export class LoginComponent implements OnInit {
           .subscribe((resp: any) => {
             resolve(resp.access_token);
             this.saveToken(resp);
+            this.loadGenres();
           }, err => {
             reject();
               this.message = "Error! Invalid entered data";
@@ -70,8 +73,9 @@ export class LoginComponent implements OnInit {
     }
   }
   saveToken(token) {
-    console.log('token: ', token);
     localStorage.setItem('jwtToken', token.access_token);
+    console.log(token.access_token);
+
   }
   saveUser(user) {
     localStorage.setItem('login', user.login);
@@ -79,6 +83,13 @@ export class LoginComponent implements OnInit {
     this.userService.setUser(new User(user.login, user.email));
     this.filterBooksService.loadBooks();
     this.router.navigate(['books']);
+  }
+
+  loadGenres() {
+    this.genresService.loadGenres()
+      .subscribe((genres: string[])=> {
+        this.genresService.setGenres(genres);
+      });
   }
 
 

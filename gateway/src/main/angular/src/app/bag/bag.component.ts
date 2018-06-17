@@ -32,6 +32,10 @@ export class BagComponent implements OnInit {
       });
     this.bagService.loadBag()
       .subscribe((book: Book[]) => {
+        if (book) {
+          this.bagService.setBagList(book);
+
+        }
       });
   }
 
@@ -43,31 +47,36 @@ export class BagComponent implements OnInit {
   }
 
   deleteBook(book) {
-    this.bagService.removeBagItem(book.id);
-    this.countOrderPrice();
-    this.toastr.info(book.title + ' was removed');
-    // TODO send request for delete book from bagList
+    this.bagService.removeBook(book)
+      .subscribe((books) => {
+        this.bagService.setBagList(books);
+        this.toastr.info(book.title + ' was removed');
+      });
   }
 
   buyBooks() {
-    this.toastr.success('You bought new books!', 'Congratulations');
-    this.bagService.removeBag();
+    this.bagService.removeBucket()
+      .subscribe((resp) => {
+        this.toastr.success('You bought new books!', 'Congratulations');
+        this.bagService.removeBag();
+      });
   }
 
   minusItem(book: Book) {
-    if (book.orderedCount >= 0) {
+    if (book.orderedCount > 1) {
       book.orderedCount--;
-    } else {
-      book.orderedCount = 0;
+      this.bagService.updateBook(book).subscribe();
+    } else if (book.orderedCount == 1) {
+      this.deleteBook(book);
     }
     this.countOrderPrice();
-    this.bagService.changeBagItem(book);
   }
 
   plusItem(book: Book) {
     book.orderedCount++;
     this.countOrderPrice();
-    this.bagService.changeBagItem(book);
+    this.bagService.updateBook(book).subscribe()
+    // this.bagService.changeBagItem(book);
   }
 
 

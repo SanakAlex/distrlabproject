@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FilterBooksService} from "../services/filter-books.service";
 import {GenresService} from "../services/genres.service";
 
@@ -9,16 +9,24 @@ import {GenresService} from "../services/genres.service";
 })
 export class CatalogComponent implements OnInit {
 
-  catalog: string[] = [
-  ];
+  catalog: string[] = [];
+
   constructor(private filterBooksService: FilterBooksService,
-              private genresService: GenresService) { }
+              private genresService: GenresService) {
+  }
 
   ngOnInit() {
-    this.genresService.loadGenres()
-      .subscribe((genres: string[])=> {
-        this.catalog = genres;
-      });
+    if (localStorage.getItem('jwtToken')) {
+      this.genresService.loadGenres()
+        .subscribe((genres: string[]) => {
+          this.catalog = genres;
+        });
+    } else {
+      this.genresService.subscribeOnBooks()
+        .subscribe((genres: string[]) => {
+          this.catalog = genres;
+        });
+    }
 
   }
 
