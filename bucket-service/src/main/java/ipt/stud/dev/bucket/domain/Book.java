@@ -1,9 +1,12 @@
 package ipt.stud.dev.bucket.domain;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Book {
+public class Book  implements Serializable {
+
+    private static final long serialVersionUID = 1234322L;
 
     @NotNull
     private String id;
