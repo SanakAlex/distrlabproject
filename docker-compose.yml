@@ -138,6 +138,16 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  bucket-service-2:
+      image: distrlabproject/bucket-service
+      restart: on-failure
+      depends_on:
+        - config
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
+
   monitoring:
     image: distrlabproject/monitoring
     restart: on-failure
